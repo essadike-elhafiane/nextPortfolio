@@ -1,7 +1,11 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { SlSocialLinkedin } from "react-icons/sl";
+import {
+  SlSocialFacebook,
+  SlSocialGithub,
+  SlSocialLinkedin,
+} from "react-icons/sl";
 import { SlSocialTwitter } from "react-icons/sl";
 import { FaFacebook } from "react-icons/fa";
 import { SlSocialInstagram } from "react-icons/sl";
@@ -34,7 +38,6 @@ const applyAnimation = () => {
 export default function Home() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [showSocials, setShowSocials] = useState(false);
-  
 
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -120,7 +123,6 @@ export default function Home() {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      
       if (window.innerWidth < 1392) {
         setShowSocials(false);
       } else {
@@ -130,7 +132,6 @@ export default function Home() {
 
     return () => {
       window.removeEventListener("resize", () => {
-        
         if (window.innerWidth < 1392) {
           setShowSocials(false);
         } else {
@@ -166,9 +167,9 @@ export default function Home() {
               <hr className="p-1 w-[30px]  ml-[-40px] mt-[13px]" />
               <SlSocialLinkedin className=" cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
               <SlSocialTwitter className=" cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
-              <FaFacebook className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
+              <SlSocialFacebook className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
               <SlSocialInstagram className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
-              <FaGithub className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
+              <SlSocialGithub className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
             </div>
             <div className="flex gap-4 w-[300px] mt-4">
               <hr className="p-1 w-[30px] ml-[-40px] mt-[13px]" />

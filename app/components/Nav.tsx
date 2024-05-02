@@ -104,7 +104,7 @@ const LinksComponenT = () => {
 
   return (
     <nav
-      className={`z-10 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer ${
+      className={`z-10 pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer ${
         navLinks ? "bg-[var(--bg-color)]" : ""
       }`}
     >
