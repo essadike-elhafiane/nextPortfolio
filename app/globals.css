@@ -2,10 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+::selection {
+  color: #5FEAD6; 
+  background: rgba(56, 178, 172, 0.2);
+}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --tw-bg-opacity: 1;
+  --bg-color: rgb(15 23 42/var(--tw-bg-opacity));
+  --text-color : rgb(226 232 240);
+  --text-color--op : rgb(226 232 240/.6);
+  --text-special : #5FEAD6;
+}
+
+.TextColor{
+  color: var(--text-color--op);
+}
+
+.TextNormalColor{
+  color: var(--text-color);
+}
+
+.TextSpecialColor{
+  color: var(--text-special);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,6 +39,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -24,10 +51,201 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    overflow: hidden;
+    color: var(--text-color);
+    scrollbar-width: thin; /* Makes the scrollbar thinner */
+    scrollbar-color: var(--text-color--op) var(--bg-color);
 }
+
+::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+}
+
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.bgColor {
+    background-color: rgb(15 23 42/var(--tw-bg-opacity));
+}
+
+.tracking-effect {
+  position: fixed; /* Use fixed if you want it to follow the cursor */
+  width: 200px; /* Size of the circle */
+  height: 200px; /* Size of the circle */
+  border-radius: 50%;
+  background-color: #101f42d4; /* Dark blue color */
+  filter: blur(10px);
+  opacity: .7;
+  /* border: 50px solid #101f4253; Border color */
+  box-shadow: 0 0 300px 300px #101f42d4; /* The glow effect */
+  pointer-events: none; /* Make sure the circle doesn't prevent clicking on elements */
+  transform: translate(-50%, -50%); /* Center the circle on the cursor */
+  transition: transform 0.01s linear, width 0.01s linear, height 0.01s linear;
+  /* background-color: white; */
+}
+
+
+.buttonAnimation {
+  padding: .8em 2em;
+  width: 140px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid var(--text-special);
+  box-shadow: 0 0 0 0 var(--text-special);
+}
+
+.buttonAnimation:hover {
+  transform: translateY(-4px) translateX(-2px);
+  box-shadow: 2px 5px 0 0 var(--text-special);
+}
+
+
+.buttonAnimation:active {
+  transform: translateY(2px) translateX(1px);
+  box-shadow: 0 0 0 0 var(--text-special);
+};
+
+.inputGroup {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 1em 0 1em 0;
+  max-width: 190px;
+  position: relative;
+}
+
+.inputGroup .Inputt {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 1px solid var(--text-special);
+  background-color: transparent;
+  border-radius: 10px;
+  width: 90%;
+}
+
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  /* background-color: red; */
+  left: 0;
+  /* top: 0; */
+  padding: 0.8em;
+  /* margin-left: 0.5em; */
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: var(--text-color--op);
+}
+
+.inputGroup :is(.Inputt:focus, .Inputt:valid)~label {
+  transform: translateY(-78%) translateX(-1.6em) scale(.9);
+  margin: 0em;
+  margin-left: 1.3em;
+  padding: 0.4em;
+  background-color: transparent;
+  color: var(--text-special);
+}
+
+.inputGroup :is(.Inputt:focus, .Inputt:valid) {
+  border-color: rgba(56, 178, 172, 0.206);
+}
+
+/* button */
+button {
+  font-family: inherit;
+  font-size: 20px;
+  /* background: royalblue; */
+
+  color: var(--text-special);
+  padding: 0.7em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: pointer;
+  padding: .8em 2em;
+  width: 120px;
+}
+
+button span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+button svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+button:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+button:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+button:hover span {
+  transform: translateX(5em);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateX(0.1em);
+  }
+
+  to {
+    transform: translateX(-0.1em);
+  }
+}
+
+
+.containerNav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 1em 2em; */
+  right: 20px;
+  
+  
+}
+@media (max-width: 768px){
+  .containerNav{
+    right: 0px;
+  }
+}
+
+.containerNav a{
+  background-color: var(--bg-color);
+  border-bottom: 1px solid #050505;
+  min-width: 130px;
+  font-weight: 800;
+}
+
+.containerNav a:hover{
+  color: var(--text-special);
+  border-bottom: none;
+  min-width: 130px;
+  font-weight: 100;
+}
+
+.containerNav :nth-child(1){
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.containerNav :last-child{
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }

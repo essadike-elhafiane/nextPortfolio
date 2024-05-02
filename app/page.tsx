@@ -1,112 +1,344 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { SlSocialLinkedin } from "react-icons/sl";
+import { SlSocialTwitter } from "react-icons/sl";
+import { FaFacebook } from "react-icons/fa";
+import { SlSocialInstagram } from "react-icons/sl";
+import { FaGithub } from "react-icons/fa6";
+import toast, { Toaster } from "react-hot-toast";
+import About from "./components/aboutme";
+import Project from "./components/Project";
+import Contact from "./components/Contact";
+import Name from "./components/Name";
+import "@/app/circle.css";
+import { motion, stagger, useAnimate, useInView } from "framer-motion";
+import { FaBars } from "react-icons/fa";
+import LinksComponent from "./components/Nav";
+
+// function throttle(func: Function, limit: number) {
+//   let inThrottle: boolean;
+//   return function (this: any) {
+//     const args = arguments;
+//     const context = this;
+//     if (!inThrottle) {
+//       func.apply(context, args);
+//       inThrottle = true;
+//       setTimeout(() => (inThrottle = false), limit);
+//     }
+//   };
+// }
+
+const applyAnimation = () => {
+  const elements = document.querySelectorAll('.slide-inN');
+  console.log(elements);
+  elements.forEach((el, index) => {
+    const element = el as HTMLElement; // Type assertion
+
+    setTimeout(() => {
+      element.style.transition = 'transform 0.8s ease, opacity 0.8s ease';
+      element.style.transform = 'translateX(0)';
+      element.style.opacity = '1';
+    }, index * 0); // 300ms stagger delay
+  });
+};
 
 export default function Home() {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [showSocials, setShowSocials] = useState(true);
+  const [navLinks, setNavLinks] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+   if (!showSocials) {
+    return () => {
+        setPosition({ x: -50, y: -50 });
+    }}
+
+    const setFromEvent = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    };
+
+    // const throttledSetFromEvent = throttle(setFromEvent, 100); // Updates position at most every 100 milliseconds
+
+    window.addEventListener("mousemove", setFromEvent);
+
+    return () => {
+      window.removeEventListener("mousemove", setFromEvent);
+    };
+  }, [showSocials]);
+
+  const [isCopied, setIsCopied] = useState(false);
+
+  async function copyTextToClipboard(text: string) {
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand("copy", true, text);
+    }
+  }
+  useEffect(() => {
+    applyAnimation(); // Apply the staggered animation delay
+}, []);
+  // onClick handler function for the copy button
+  const handleCopyClick = () => {
+    // Asynchronously call copyTextToClipboard
+    copyTextToClipboard("saddik.bo@gmail.com")
+      .then(() => {
+        // If successful, update the isCopied state value
+        if (isCopied) return;
+        setIsCopied(true);
+        toast.success("Email copied to clipboard");
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 1500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll("section"));
+    let currentSectionIndex = 0;
+    let isScrolling = false;
+
+    const handleScroll = (event: WheelEvent) => {
+      event.preventDefault();
+
+      if (isScrolling) return; // Block scrolling if a scroll animation is in progress
+
+      const delta = event.deltaY;
+
+      if (delta > 0 && currentSectionIndex < sections.length - 1) {
+        currentSectionIndex++;
+      } else if (delta < 0 && currentSectionIndex > 0) {
+        currentSectionIndex--;
+      }
+
+      isScrolling = true;
+
+      sections[currentSectionIndex].scrollIntoView({ behavior: "smooth" });
+
+      setTimeout(() => {
+        isScrolling = false; // Allow scrolling again after 500ms
+      }, 500);
+    };
+
+    window.addEventListener("wheel", handleScroll, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+    };
+  }, []);
+
+  const [scope, animate] = useAnimate();
+ 
+
+  useEffect(() => {
+    animate(
+      scope.current.children,
+      {
+        y: [-10, 0], // Move from 50px down to its original position
+        opacity: [0, 1],
+      },
+      {
+        duration: 0.8,
+        delay: stagger(0.3), // Stagger by 0.3 seconds
+        ease: "easeInOut",
+      }
+    );
+   
+    
+    
+    if (window.innerWidth < 1392) {
+      setShowSocials(false);
+    }
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 1392) {
+        setShowSocials(false);
+      } else {
+        setShowSocials(true);
+      }
+    });
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        if (window.innerWidth < 1392) {
+          setShowSocials(false);
+        } else {
+          setShowSocials(true);
+        }
+      });
+    };
+  }, [scope, animate]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
+    <main className=" min-w-screen flex-col bgColor">
+      <nav className={`z-10 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer ${navLinks && !showSocials? 'bg-[var(--bg-color)]': ''}`}>
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
           priority
+          className={`cursor-pointer ${
+            showSocials ? "w-[100px] h-[100px]" : "w-[50px] h-[50px]"
+          } `}
+          src="./ES.svg"
+          alt="Picture of the author"
+          width={100}
+          height={100}
         />
-      </div>
+        {showSocials ? (
+          <div className="flex items-center gap-4" ref={scope}>
+            <a href="#Home" className="text-sm font-medium ">
+              Home
+            </a>
+            <a href="#About" className="text-sm font-medium">
+              About
+            </a>
+            <a href="#Services" className="text-sm font-medium">
+              Services
+            </a>
+            <a href="#Projects" className="text-sm font-medium">
+              Projects
+            </a>
+            <a href="#Contact" className="text-sm font-medium">
+              Contact
+            </a>
+          </div>
+        ) : (
+          <>
+          <FaBars className="w-[25px] h-[25px] " onClick={()=>setNavLinks(!navLinks)} />
+          {navLinks &&  <LinksComponent />}
+          </>
+        )}
+      </nav>
+      <div
+        className="tracking-effect z-[0]"
+        style={{ left: `${position.x - 20}px`, top: `${position.y - 20}px` }}
+      ></div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+      <Toaster
+        position="top-center"
+        containerStyle={{
+          backgroundColor: "transparent",
+          fontSize: "12px",
+          padding: "1px",
+          marginTop: "40px",
+        }}
+      />
+      <div
+        ref={containerRef}
+        className="min-w-screen h-[100vh] overflow-scroll z-[1] overflow-x-hidden scroll-smooth flex justify-center "
+      >
+        {showSocials && (
+          <div className=" z-[10] absolute bottom-8 left-20">
+            <div className="flex gap-4 w-[300px]  TextColor">
+              <hr className="p-1 w-[30px]  ml-[-40px] mt-[13px]" />
+              <SlSocialLinkedin className=" cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
+              <SlSocialTwitter className=" cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
+              <FaFacebook className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
+              <SlSocialInstagram className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
+              <FaGithub className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
+            </div>
+            <div className="flex gap-4 w-[300px] mt-4">
+              <hr className="p-1 w-[30px] ml-[-40px] mt-[13px]" />
+              <div
+                onClick={handleCopyClick}
+                className=" TextColor cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out"
+              >
+                saddik.bo@gmail.com
+              </div>
+            </div>
+          </div>
+        )}
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <div>
+          <section
+            id="Home"
+            className="min-h-[100vh] w-[100%] flex flex-col gap-8 justify-center items-center "
+          >
+            <Name show={showSocials} />
+          </section>
+          {/* <section
+            id="About"
+            className="w-[100%] min-h-[100vh] flex justify-center items-center"
+          >
+            <div className="z-[10]">
+              <div className="mt-20 mb-10 flex items-center gap-2">
+                <hr className="w-20 Text" />{" "}
+                <span className="TextSpecialColor">About me</span>{" "}
+                <hr className="w-20 Text" />
+              </div>
+              <About />
+            </div>
+          </section>
+          <section
+            id="Projects"
+            className="mw-[100%] min-h-[100vh] flex justify-center items-center"
+          >
+            <Project />
+          </section>
+          <section
+            id="Contact"
+            className="relative min-h-[100vh] flex justify-center items-center"
+          >
+            <div className=" w-[700px] h-[100vh] relative ">
+              <div className="mt-[30vh] mb-10 flex items-center gap-2 ">
+                <hr className="w-20 Text" />{" "}
+                <span className="TextSpecialColor">Contact</span>{" "}
+                <hr className="w-20 Text" />
+              </div>
+              <div className="TextColor mb-10">
+                I am currently open to new opportunities, and my inbox is always
+                open. Feel free to reach out with questions or just to say
+                hello—I'll respond as soon as I can!
+              </div>
+              <Contact />
+              <footer className="mt-[80px] mb-10 pr-10 TextColor absolute bottom-1">
+                <p>
+                  Designed and coded with ❤️ by me. Built with{" "}
+                  <a
+                    className="TextNormalColor"
+                    href="https://nextjs.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    Next.js
+                  </a>{" "}
+                  and
+                  <a
+                    className="TextNormalColor"
+                    href="https://tailwindcss.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    Tailwind CSS
+                  </a>
+                  , and deployed on{" "}
+                  <a
+                    className="TextNormalColor"
+                    href="https://vercel.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Vercel
+                  </a>
+                  . All content is styled in the{" "}
+                  <a
+                    className="TextNormalColor"
+                    href="https://fonts.google.com/specimen/Inter"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Poppins font
+                  </a>
+                  . © 2024 Essadike Elhafiane. All rights reserved.
+                </p>
+              </footer>
+            </div>
+          </section> */}
+        </div>
       </div>
     </main>
   );

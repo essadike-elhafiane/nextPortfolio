@@ -1,0 +1,105 @@
+ .profession-container .profession-box{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 100vh;
+
+
+background: purple;
+
+
+border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+animation: professionR 13s ease-out infinite;
+
+
+}
+
+
+@keyframes professionR {
+    0%, 20%{
+        transform: rotate(0deg);
+    }
+    25%, 45%{
+        transform: rotate(-90deg);
+    }
+    50%, 70%{
+        transform: rotate(-180deg);
+    }
+    75%, 95%{
+        transform: rotate(-270deg);
+    }
+    100%{
+        transform: rotate(-360deg);
+    }
+}
+
+ .profession-container .profession-box
+
+ .profession-box .profession{
+    left: 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: var(--main-color);
+    transform: rotate( calc(360deg / 4 * var(--i)));
+    transform-origin: 380px;
+    background: var(--bg-color);
+
+
+background: red;
+
+ padding: 13px 0;
+} 
+
+ .profession-box .profession:nth-child(1) i, .profession-box .profession:nth-child(4) i{
+    margin-right: px;
+}
+ .profession-box .profession:nth-child(2) i{
+    margin-right: 55px;
+}
+
+ .profession-box .profession:nth-child(2), .profession-box .profession:nth-child(4){
+    padding-bottom: 20px;
+}
+
+ .profession i{
+    font-size: 3.8rem;
+}
+ .profession h3 {
+    font-size: 3.2rem;
+    line-height: 1;
+    font-weight: 600;
+}
+
+ .profession-box .circle
+{
+     position: fixed; 
+    margin-left: 100px;
+    float: left;
+    width: 550px;
+    height: 550px;
+    border: 3px solid var(--main-color);
+    border-radius: 50%;
+}
+
+.profession-container .overlay {
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    /* background: linear-gradient(to bottom, #ff0000, #0000ff);÷ */
+    border-top: 50vh solid var(--main-color);
+    border-bottom: 50vh solid var(--main-color);
+    border-left: 25vw solid transparent;
+    border-right: 25vw solid var(--main-color);
+    /* padding: 10px; */
+}
