@@ -15,34 +15,34 @@ import "@/app/circle.css";
 import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { FaBars } from "react-icons/fa";
 import LinksComponent from "./components/Nav";
-
+import LinksComponenT from "./components/Nav";
 
 const applyAnimation = () => {
-  const elements = document.querySelectorAll('.slide-inN');
+  const elements = document.querySelectorAll(".slide-inN");
   console.log(elements);
   elements.forEach((el, index) => {
     const element = el as HTMLElement; // Type assertion
 
     setTimeout(() => {
-      element.style.transition = 'transform 0.8s ease, opacity 0.8s ease';
-      element.style.transform = 'translateX(0)';
-      element.style.opacity = '1';
+      element.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+      element.style.transform = "translateX(0)";
+      element.style.opacity = "1";
     }, index * 0); // 300ms stagger delay
   });
 };
 
 export default function Home() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [showSocials, setShowSocials] = useState(window.innerWidth > 1392 ? true : false);
-  const [navLinks, setNavLinks] = useState(window.innerWidth < 768 ? false : true);
-  const [switchNavLinks, setSwitchNavLinks] = useState(false);
+  const [showSocials, setShowSocials] = useState(false);
+  
 
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-   if (!showSocials) {
-    return () => {
+    if (!showSocials) {
+      return () => {
         setPosition({ x: -50, y: -50 });
-    }}
+      };
+    }
 
     const setFromEvent = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
@@ -63,9 +63,10 @@ export default function Home() {
       return document.execCommand("copy", true, text);
     }
   }
+
   useEffect(() => {
     applyAnimation(); // Apply the staggered animation delay
-}, []);
+  }, []);
   // onClick handler function for the copy button
   const handleCopyClick = () => {
     // Asynchronously call copyTextToClipboard
@@ -90,7 +91,6 @@ export default function Home() {
     let isScrolling = false;
 
     const handleScroll = (event: WheelEvent) => {
-      
       event.preventDefault();
       if (isScrolling) return; // Block scrolling if a scroll animation is in progress
 
@@ -118,45 +118,19 @@ export default function Home() {
     };
   }, []);
 
-  const [scope, animate] = useAnimate();
- 
-
   useEffect(() => {
-    scope && scope.current &&  animate(
-      scope?.current?.children,
-      {
-        y: [-10, 0], // Move from 50px down to its original position
-        opacity: [0, 1],
-      },
-      {
-        duration: 0.8,
-        delay: stagger(0.3), // Stagger by 0.3 seconds
-        ease: "easeInOut",
-      }
-    );
     window.addEventListener("resize", () => {
-      if (window.innerWidth < 768) {
-        setSwitchNavLinks(true);
-      }
-      else {
-        setSwitchNavLinks(false);
-      }
+      
       if (window.innerWidth < 1392) {
-        
         setShowSocials(false);
       } else {
         setShowSocials(true);
       }
     });
-    
+
     return () => {
       window.removeEventListener("resize", () => {
-        if (window.innerWidth < 768) {
-          setSwitchNavLinks(true);
-        }
-        else {
-          setSwitchNavLinks(false);
-        }
+        
         if (window.innerWidth < 1392) {
           setShowSocials(false);
         } else {
@@ -164,51 +138,15 @@ export default function Home() {
         }
       });
     };
-  }, [scope, animate]);
+  }, []);
 
   return (
     <main className=" min-w-screen flex-col bgColor">
-      <nav className={`z-10 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer ${navLinks && !showSocials? 'bg-[var(--bg-color)]': ''}`}>
-        <Image
-          priority
-          className={`cursor-pointer ${
-             "w-[100px] h-[100px]" 
-          } `}
-          src="./ES.svg"
-          alt="Picture of the author"
-          width={100}
-          height={100}
-        />
-        { !switchNavLinks ? (
-          <div className="flex items-center gap-4" ref={scope}>
-            <a href="#Home" className="text-sm font-medium ">
-              Home
-            </a>
-            <a href="#About" className="text-sm font-medium">
-              About
-            </a>
-            <a href="#Services" className="text-sm font-medium">
-              Services
-            </a>
-            <a href="#Projects" className="text-sm font-medium">
-              Projects
-            </a>
-            <a href="#Contact" className="text-sm font-medium">
-              Contact
-            </a>
-          </div>
-        ) : (
-          <>
-          <FaBars className="w-[25px] h-[25px] " onClick={()=>setNavLinks(!navLinks)} />
-          {navLinks &&  <LinksComponent />}
-          </>
-        )}
-      </nav>
+      <LinksComponenT />
       <div
         className="tracking-effect z-[0]"
         style={{ left: `${position.x - 20}px`, top: `${position.y - 20}px` }}
       ></div>
-
       <Toaster
         position="top-center"
         containerStyle={{
