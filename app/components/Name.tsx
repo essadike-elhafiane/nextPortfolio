@@ -24,17 +24,16 @@ const Name = (props: { show: boolean }) => {
 
   const words = [
     {
-      text: "Software engineer",
+      text: "full stack developer",
       className: "TextColor md:text-[40px] h-[20px]",
     },
-    { text: "&", className: "TextSpecialColor md:text-[40px] h-[20px]" },
-    { text: "full stack dev.", className: "TextColor md:text-[40px] h-[20px]" },
+    { text: ".", className: "TextSpecialColor md:text-[40px] h-[20px]" },
   ];
 
   return (
     <div className="w-[80%] md:max-w-[800px] text-left z-[5]">
       <h3 className="text-[12px] md:text-[22px] TextSpecialColor reveal">
-        Hello, I'am
+        Hello, I'm
       </h3>
       <h1 className="text-[18px] md:text-[42px] revealR">Essadike elhafiane</h1>
       <TypewriterEffectSmooth words={words} />

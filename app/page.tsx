@@ -16,18 +16,6 @@ import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { FaBars } from "react-icons/fa";
 import LinksComponent from "./components/Nav";
 
-// function throttle(func: Function, limit: number) {
-//   let inThrottle: boolean;
-//   return function (this: any) {
-//     const args = arguments;
-//     const context = this;
-//     if (!inThrottle) {
-//       func.apply(context, args);
-//       inThrottle = true;
-//       setTimeout(() => (inThrottle = false), limit);
-//     }
-//   };
-// }
 
 const applyAnimation = () => {
   const elements = document.querySelectorAll('.slide-inN');
@@ -45,8 +33,9 @@ const applyAnimation = () => {
 
 export default function Home() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [showSocials, setShowSocials] = useState(true);
-  const [navLinks, setNavLinks] = useState(false);
+  const [showSocials, setShowSocials] = useState(window.innerWidth > 1392 ? true : false);
+  const [navLinks, setNavLinks] = useState(window.innerWidth < 768 ? false : true);
+  const [switchNavLinks, setSwitchNavLinks] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -58,9 +47,6 @@ export default function Home() {
     const setFromEvent = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
     };
-
-    // const throttledSetFromEvent = throttle(setFromEvent, 100); // Updates position at most every 100 milliseconds
-
     window.addEventListener("mousemove", setFromEvent);
 
     return () => {
@@ -136,8 +122,8 @@ export default function Home() {
  
 
   useEffect(() => {
-    animate(
-      scope.current.children,
+    scope && scope.current &&  animate(
+      scope?.current?.children,
       {
         y: [-10, 0], // Move from 50px down to its original position
         opacity: [0, 1],
@@ -148,22 +134,29 @@ export default function Home() {
         ease: "easeInOut",
       }
     );
-   
-    
-    
-    if (window.innerWidth < 1392) {
-      setShowSocials(false);
-    }
     window.addEventListener("resize", () => {
+      if (window.innerWidth < 768) {
+        setSwitchNavLinks(true);
+      }
+      else {
+        setSwitchNavLinks(false);
+      }
       if (window.innerWidth < 1392) {
+        
         setShowSocials(false);
       } else {
         setShowSocials(true);
       }
     });
-
+    
     return () => {
       window.removeEventListener("resize", () => {
+        if (window.innerWidth < 768) {
+          setSwitchNavLinks(true);
+        }
+        else {
+          setSwitchNavLinks(false);
+        }
         if (window.innerWidth < 1392) {
           setShowSocials(false);
         } else {
@@ -179,14 +172,14 @@ export default function Home() {
         <Image
           priority
           className={`cursor-pointer ${
-            showSocials ? "w-[100px] h-[100px]" : "w-[50px] h-[50px]"
+             "w-[100px] h-[100px]" 
           } `}
           src="./ES.svg"
           alt="Picture of the author"
           width={100}
           height={100}
         />
-        {showSocials ? (
+        { !switchNavLinks ? (
           <div className="flex items-center gap-4" ref={scope}>
             <a href="#Home" className="text-sm font-medium ">
               Home
