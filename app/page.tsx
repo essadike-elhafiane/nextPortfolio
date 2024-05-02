@@ -104,8 +104,8 @@ export default function Home() {
     let isScrolling = false;
 
     const handleScroll = (event: WheelEvent) => {
+      
       event.preventDefault();
-
       if (isScrolling) return; // Block scrolling if a scroll animation is in progress
 
       const delta = event.deltaY;
@@ -258,9 +258,9 @@ export default function Home() {
           >
             <Name show={showSocials} />
           </section>
-          {/* <section
+          <section
             id="About"
-            className="w-[100%] min-h-[100vh] flex justify-center items-center"
+            className="w-[100%] max-w-[700px] w-[100%] min-h-[100vh] flex justify-center items-center"
           >
             <div className="z-[10]">
               <div className="mt-20 mb-10 flex items-center gap-2">
@@ -273,7 +273,7 @@ export default function Home() {
           </section>
           <section
             id="Projects"
-            className="mw-[100%] min-h-[100vh] flex justify-center items-center"
+            className="max-w-[700px] w-[100%] min-h-[100vh] flex justify-center items-center"
           >
             <Project />
           </section>
@@ -281,7 +281,7 @@ export default function Home() {
             id="Contact"
             className="relative min-h-[100vh] flex justify-center items-center"
           >
-            <div className=" w-[700px] h-[100vh] relative ">
+            <div className=" max-w-[700px] w-[100%] h-[100vh] relative ">
               <div className="mt-[30vh] mb-10 flex items-center gap-2 ">
                 <hr className="w-20 Text" />{" "}
                 <span className="TextSpecialColor">Contact</span>{" "}
@@ -337,7 +337,7 @@ export default function Home() {
                 </p>
               </footer>
             </div>
-          </section> */}
+          </section>
         </div>
       </div>
     </main>
