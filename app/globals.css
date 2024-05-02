@@ -45,16 +45,12 @@ html {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background:var(--bg-color);
     overflow: hidden;
     color: var(--text-color);
     scrollbar-width: thin; /* Makes the scrollbar thinner */
     scrollbar-color: var(--text-color--op) var(--bg-color);
+    
 }
 
 ::-webkit-scrollbar {
