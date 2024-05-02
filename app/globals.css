@@ -222,7 +222,7 @@ button:active {
 }
 @media (max-width: 768px){
   .containerNav{
-    right: 0px;
+    right: 10px;
   }
 }
 

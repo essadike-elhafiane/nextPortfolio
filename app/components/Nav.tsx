@@ -12,12 +12,12 @@ const LinksComponent = () => {
         animate(
             'a',
             {
-                x: [50, 0], // Slide from 50px above to 0px
+                x: [10, 0], // Slide from 50px above to 0px
                 opacity: [0, 1],
             },
             {
-                duration: 0.5,
-                delay: stagger(0.2), // Stagger by 0.3 seconds
+                duration: 0.1,
+                delay: stagger(0.1), // Stagger by 0.3 seconds
                 ease: 'easeInOut',
             }
         );
