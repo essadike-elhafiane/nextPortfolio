@@ -2,14 +2,17 @@
 import '@/app/globals.css';
 import { Meteors } from '@/app/utils/meteors';
 import '@/app/globals.css';
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from 'react';
 
 
-const ProjectItme = () => {
+const ProjectItem = () => {
   
 
     return (
         
-      <div className=" w-full relative mt-6 ">
+      <div className=" w-[400px] relative mt-6 shrink-0">
         <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] bg-red-500 rounded-full blur-3xl" />
         <div className="relative shadow-xl bg-gray-900 border border-gray-800  px-4 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-end items-start">
           <div className="h-5 w-5 rounded-full border flex items-center justify-center mb-4 border-gray-500">
@@ -44,24 +47,59 @@ const ProjectItme = () => {
           </button>
  
           {/* Meaty part - Meteor effect */}
-          <Meteors number={20} />
+          <Meteors number={0} />
         </div>
       </div>
         );
 }
 
-const Project = () => {
-  
 
-    return (
-        <div> 
-            <div className='mt-20 flex items-center gap-2'><hr className='w-20 Text'/> <span className='TextSpecialColor'>Projects</span> <hr className='w-20 Text'/></div>
-            <ProjectItme />
-            <ProjectItme />
-            <ProjectItme />
-        </div>
-    );
-}
+
+const Project = () => {
+  const controls = useAnimation();
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start({
+        x: 0,
+        opacity: 1,
+        transition: { duration: 1, ease: "easeInOut" },
+      });
+    } else {
+      controls.start({
+        x: -100,
+        opacity: 0,
+        transition: { duration: 0.5, ease: "easeInOut" },
+      });
+    }
+  }, [controls, inView]);
+
+  return (
+    <motion.div
+      ref={ref}
+      className="flex flex-col justify-center items-center w-[100%]"
+      initial={{ x: -100, opacity: 0 }}
+      animate={controls}
+      exit={{ opacity: 0 }}
+    >
+     
+      <motion.div
+        className="flex w-[80%] flex-wrap gap-4 justify-center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
+      >
+        <ProjectItem />
+        <ProjectItem />
+        <ProjectItem />
+        <ProjectItem />
+        <ProjectItem />
+        <ProjectItem />
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export default Project;
  

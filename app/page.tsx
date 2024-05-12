@@ -192,9 +192,9 @@ export default function Home() {
           </section>
           <section
             id="About"
-            className="w-[100%] max-w-[700px] w-[100%] min-h-[100vh] flex justify-center items-center"
+            className="w-[100%] w-[100%] min-h-[100vh] flex justify-center items-center"
           >
-            <div className="z-[10]">
+            <div className="z-[10] flex flex-col justify-center items-center">
               <div className="mt-20 mb-10 flex items-center gap-2">
                 <hr className="w-20 Text" />{" "}
                 <span className="TextSpecialColor">About me</span>{" "}
@@ -205,8 +205,13 @@ export default function Home() {
           </section>
           <section
             id="Projects"
-            className="max-w-[700px] w-[100%] min-h-[100vh] flex justify-center items-center"
+            className="w-[100%] min-h-[100vh] flex flex-col justify-center items-center"
           >
+            <div className="mt-20 flex items-center gap-2 z-10">
+              <hr className="w-20 Text" />{" "}
+              <span className="TextSpecialColor">Projects</span>{" "}
+              <hr className="w-20 Text" />
+            </div>
             <Project />
           </section>
           <section
