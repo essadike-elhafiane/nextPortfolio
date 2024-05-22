@@ -36,7 +36,7 @@ const Name = () => {
   ];
 
   return (
-    <div className="w-[80%] sm:max-w-[800px] text-left z-[5] flex flex-col gap-0">
+    <div className="w-[80%] sm:max-w-[800px] text-left z-[2] flex flex-col gap-0 p-2">
       <h3 className="text-[12px] sm:text-[22px] TextSpecialColor reveal">
         Hello, I'm
       </h3>

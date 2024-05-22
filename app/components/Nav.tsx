@@ -105,7 +105,7 @@ const LinksComponenT = () => {
   const router = useRouter();
   return (
     <nav
-      className={`z-10 pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer ${
+      className={`z-[1000] pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer ${
         navLinks ? "bg-[var(--bg-color)]" : ""
       }`}
     >
@@ -127,11 +127,11 @@ const LinksComponenT = () => {
           <a href="#About" className="text-sm font-medium">
             About
           </a>
-          <a href="#Services" className="text-sm font-medium">
-            Services
-          </a>
           <a href="#Projects" className="text-sm font-medium">
             Projects
+          </a>
+          <a href="#Skills" className="text-sm font-medium">
+            Skills
           </a>
           <a href="#Contact" className="text-sm font-medium">
             Contact

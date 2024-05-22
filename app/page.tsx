@@ -43,11 +43,10 @@ export default function Home() {
   useEffect(() => {
     if (window.innerWidth < 768) {
       setShowSocials(false);
-    }
-    else {
+    } else {
       setShowSocials(true);
     }
-    
+
     if (!showSocials) {
       return () => {
         setPosition({ x: -50, y: -50 });
@@ -128,8 +127,6 @@ export default function Home() {
     };
   }, []);
 
- 
-
   useEffect(() => {
     window.addEventListener("resize", () => {
       if (window.innerWidth < 768) {
@@ -173,15 +170,15 @@ export default function Home() {
         <div>
           <section
             id="Home"
-            className="min-h-[100vh] w-[100%] flex flex-col gap-8 justify-center items-center "
+            className="min-h-[100vh] w-full flex flex-col gap-8 justify-center items-center "
           >
-            <Name  />
+            <Name />
           </section>
           <section
             id="About"
-            className="w-[100%] w-[100%] min-h-[100vh] flex justify-center items-center"
+            className="w-full min-h-[100vh] flex justify-center items-center"
           >
-            <div className="z-[10] flex flex-col justify-center items-center">
+            <div className="z-[10] w-full flex flex-col justify-center items-center p-2">
               <div className="mt-20 mb-10 flex items-center gap-2">
                 <hr className="w-20 Text" />{" "}
                 <span className="TextSpecialColor">About me</span>{" "}
@@ -202,65 +199,71 @@ export default function Home() {
             <Project />
           </section>
           <section
-            id="Contact"
-            className="relative min-h-[100vh] flex justify-center items-center"
+            id="Skills"
+            className="w-[100%] min-h-[100vh] flex flex-col justify-center items-center TextColor"
           >
-            <div className=" max-w-[700px] w-[100%] h-[100vh] relative ">
-              <div className="mt-[30vh] mb-10 flex items-center gap-2 ">
+            <h1 className="z-[5]">Skills</h1>
+          </section>
+          <section
+            id="Contact"
+            className="relative h-[100vh] min-h-[900px]  flex flex-col justify-center items-center"
+          >
+            <div className="max-w-[700px] w-[80%]">
+              <div className="flex items-center gap-2 ">
                 <hr className="w-20 Text" />{" "}
                 <span className="TextSpecialColor">Contact</span>{" "}
                 <hr className="w-20 Text" />
               </div>
-              <div className="TextColor mb-10">
+              <div className="TextColor mb-10 ">
                 I am currently open to new opportunities, and my inbox is always
                 open. Feel free to reach out with questions or just to say
                 hello—I'll respond as soon as I can!
               </div>
               <Contact />
-              <footer className="mt-[80px] mb-10 pr-10 TextColor absolute bottom-1">
-                <p>
-                  Designed and coded with ❤️ by me. Built with{" "}
-                  <a
-                    className="TextNormalColor"
-                    href="https://nextjs.org/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {" "}
-                    Next.js
-                  </a>{" "}
-                  and
-                  <a
-                    className="TextNormalColor"
-                    href="https://tailwindcss.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {" "}
-                    Tailwind CSS
-                  </a>
-                  , and deployed on{" "}
-                  <a
-                    className="TextNormalColor"
-                    href="https://vercel.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Vercel
-                  </a>
-                  . All content is styled in the{" "}
-                  <a
-                    className="TextNormalColor"
-                    href="https://fonts.google.com/specimen/Inter"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Poppins font
-                  </a>
-                  . © 2024 Essadike Elhafiane. All rights reserved.
-                </p>
-              </footer>
             </div>
+            <footer className="w-[100vw] pr-10 TextColor bottom-1 absolute  p-2">
+              <p>
+                Designed and coded with ❤️ by me. Built with{" "}
+                <a
+                  className="TextNormalColor"
+                  href="https://nextjs.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  Next.js
+                </a>{" "}
+                and
+                <a
+                  className="TextNormalColor"
+                  href="https://tailwindcss.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  Tailwind CSS
+                </a>
+                , and deployed on{" "}
+                <a
+                  className="TextNormalColor"
+                  href="https://vercel.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Vercel
+                </a>
+                . All content is styled in the{" "}
+                <a
+                  className="TextNormalColor"
+                  href="https://fonts.google.com/specimen/Inter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Poppins font
+                </a>
+                . © 2024 Essadike Elhafiane. All rights reserved.
+              </p>
+            </footer>
           </section>
         </div>
       </div>

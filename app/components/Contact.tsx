@@ -34,7 +34,7 @@ const Contact = () => {
 
   return (
    
-    <form onSubmit={(e: FormEvent<HTMLFormElement>) => sendEmail(e)}>
+    <form onSubmit={(e: FormEvent<HTMLFormElement>) => sendEmail(e)} className="relative">
       
       <div className="inputGroup mb-8 ">
         <input
