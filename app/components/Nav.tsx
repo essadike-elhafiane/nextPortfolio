@@ -56,7 +56,7 @@ const LinksComponent = () => {
   );
 };
 
-const LinksComponenT = () => {
+const LinksComponenT = (props:{ scroll : boolean}) => {
   const [navLinks, setNavLinks] = useState(false);
   const [switchNavLinks, setSwitchNavLinks] = useState(true);
   const [scope, animate] = useAnimate();
@@ -105,9 +105,9 @@ const LinksComponenT = () => {
   const router = useRouter();
   return (
     <nav
-      className={`z-[1000] pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer ${
-        navLinks ? "bg-[var(--bg-color)]" : ""
-      }`}
+      className={`z-[1000] pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer 
+       bg-[var(--bg-color)]
+      `}
     >
       <Image
         priority

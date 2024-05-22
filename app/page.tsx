@@ -38,6 +38,39 @@ const applyAnimation = () => {
 export default function Home() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [showSocials, setShowSocials] = useState(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Calculate how far the user has scrolled from the top of the page
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  
+      // Calculate the maximum possible scroll height
+      const scrollHeight = document.body.scrollHeight - window.innerHeight;
+  
+      // Check if the user has scrolled close to the bottom of the page
+      if (scrollTop >= scrollHeight - 50 && scrollTop > 0) {
+        // User has scrolled close to the bottom, hide the navbar
+        setIsNavbarVisible(false);
+      } else {
+        // User hasn't scrolled close to the bottom or is at the top, show the navbar
+        setIsNavbarVisible(true);
+      }
+    };
+  
+    // Set initial state based on the current scroll position
+    const initialScrollTop = window.scrollY || document.documentElement.scrollTop;
+    const initialScrollHeight = document.body.scrollHeight - window.innerHeight;
+    setIsNavbarVisible(initialScrollTop < initialScrollHeight - 50);
+  
+    // Add event listener when the component mounts
+    window.addEventListener('scroll', handleScroll);
+  
+    // Remove event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -149,7 +182,7 @@ export default function Home() {
 
   return (
     <main className=" min-w-screen flex-col bgColor">
-      <LinksComponenT />
+      <LinksComponenT scroll={isNavbarVisible}/>
       <div
         className="tracking-effect z-[0]"
         style={{ left: `${position.x - 20}px`, top: `${position.y - 20}px` }}
@@ -214,14 +247,14 @@ export default function Home() {
                 <span className="TextSpecialColor">Contact</span>{" "}
                 <hr className="w-20 Text" />
               </div>
-              <div className="TextColor mb-10 ">
+              <div className="TextColor mt-2 mb-4">
                 I am currently open to new opportunities, and my inbox is always
                 open. Feel free to reach out with questions or just to say
                 hello—I'll respond as soon as I can!
               </div>
               <Contact />
             </div>
-            <footer className="w-[100vw] pr-10 TextColor bottom-1 absolute  p-2">
+            <footer className="w-[100vw] max-w-[700px] p-10 TextColor bottom-1 absolute  p-2">
               <p>
                 Designed and coded with ❤️ by me. Built with{" "}
                 <a
