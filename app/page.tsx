@@ -41,6 +41,13 @@ export default function Home() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setShowSocials(false);
+    }
+    else {
+      setShowSocials(true);
+    }
+    
     if (!showSocials) {
       return () => {
         setPosition({ x: -50, y: -50 });
@@ -121,9 +128,11 @@ export default function Home() {
     };
   }, []);
 
+ 
+
   useEffect(() => {
     window.addEventListener("resize", () => {
-      if (window.innerWidth < 1392) {
+      if (window.innerWidth < 768) {
         setShowSocials(false);
       } else {
         setShowSocials(true);
@@ -132,7 +141,7 @@ export default function Home() {
 
     return () => {
       window.removeEventListener("resize", () => {
-        if (window.innerWidth < 1392) {
+        if (window.innerWidth < 768) {
           setShowSocials(false);
         } else {
           setShowSocials(true);
@@ -161,34 +170,12 @@ export default function Home() {
         ref={containerRef}
         className="min-w-screen h-[100vh] overflow-scroll z-[1] overflow-x-hidden scroll-smooth flex justify-center "
       >
-        {showSocials && (
-          <div className=" z-[10] absolute bottom-8 left-20">
-            <div className="flex gap-4 w-[300px]  TextColor">
-              <hr className="p-1 w-[30px]  ml-[-40px] mt-[13px]" />
-              <SlSocialLinkedin className=" cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
-              <SlSocialTwitter className=" cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
-              <SlSocialFacebook className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
-              <SlSocialInstagram className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
-              <SlSocialGithub className="cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out" />
-            </div>
-            <div className="flex gap-4 w-[300px] mt-4">
-              <hr className="p-1 w-[30px] ml-[-40px] mt-[13px]" />
-              <div
-                onClick={handleCopyClick}
-                className=" TextColor cursor-pointer w-[25px] h-[25px] hover:text-teal-300 hover:scale-[115%] transition-all duration-300 ease-in-out"
-              >
-                saddik.bo@gmail.com
-              </div>
-            </div>
-          </div>
-        )}
-
         <div>
           <section
             id="Home"
             className="min-h-[100vh] w-[100%] flex flex-col gap-8 justify-center items-center "
           >
-            <Name show={showSocials} />
+            <Name  />
           </section>
           <section
             id="About"

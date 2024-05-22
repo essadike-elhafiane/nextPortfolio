@@ -6,6 +6,7 @@ import "@/app/globals.css";
 import { FaBars } from "react-icons/fa";
 import Image from "next/image";
 import { flightRouterStateSchema } from "next/dist/server/app-render/types";
+import { useRouter } from "next/navigation";
 
 const LinksComponent = () => {
   const [scope, animate] = useAnimate();
@@ -101,7 +102,7 @@ const LinksComponenT = () => {
       });
     };
   }, [scope, animate, switchNavLinks]);
-
+  const router = useRouter();
   return (
     <nav
       className={`z-10 pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer ${
@@ -112,9 +113,11 @@ const LinksComponenT = () => {
         priority
         className={`cursor-pointer ${"w-[100px] h-[100px]"} `}
         src="./ES.svg"
-        alt="Picture of the author"
+        alt="logo"
         width={100}
         height={100}
+        
+        onClick={() => router.push("/#Home")}
       />
       {!switchNavLinks ? (
         <div className="flex items-center gap-4" ref={scope}>
