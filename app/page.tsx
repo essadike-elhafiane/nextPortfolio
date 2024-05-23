@@ -229,7 +229,7 @@ export default function Home() {
               <span className="TextSpecialColor">Projects</span>{" "}
               <hr className="w-20 Text" />
             </div>
-            <Project />
+            <Project scroll={showSocials}/>
           </section>
           <section
             id="Skills"

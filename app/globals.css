@@ -284,7 +284,7 @@ img {
 
 .project-container {
   max-width: 1000px;
-  margin: 50px auto;
+  
 }
 
 .project {
@@ -346,48 +346,21 @@ img {
   }
 }
 
-.project-img {
-  position: relative;
-  z-index: -1;
-  background-color: #64ffda;
-  background: linear-gradient(0.4turn, #64ffda, #64ff8d);
-  border-radius: 2px;
-  grid-column: 6 / -1;
-  grid-row: 1 / -1;
 
-  @media screen and (max-width: 768px) {
-    height: 100%;
-  }
-  @include tablet {
-    grid-column: 1 / -1;
-    opacity: 0.25;
-  }
 
-  &:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 3;
-    background-color: #0a192f;
-    mix-blend-mode: screen;
-    border-radius: 2px;
-  }
 
-  img {
-    border-radius: 2px;
-    position: relative;
-    mix-blend-mode: multiply;
-    filter: grayscale(100%) contrast(1);
-     
-    @media screen and (max-width: 768px) {
-      object-fit: cover;
-      width: auto;
-      height: 100%;
-    }
-  }
+.each-slide-effect > div {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 350px;
+}
+
+.each-slide-effect span {
+  padding: 20px;
+  font-size: 20px;
+  background: #efefef;
+  text-align: center;
 }
