@@ -240,7 +240,7 @@ export default function Home() {
           </section>
           <section
             id="Contact"
-            className="relative h-[100vh] min-h-[900px]  flex flex-col justify-center items-center"
+            className="relative h-[100vh] min-h-[960px]  flex flex-col justify-center items-center"
           >
             <div className="max-w-[700px] w-[80%] flex flex-col items-center">
             <div className="mt-20 mb-10 flex items-center gap-2">
