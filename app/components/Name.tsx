@@ -1,31 +1,37 @@
 "use client";
-import { TypewriterEffectSmooth } from "../utils/typewriter-effect";
 import React, { useEffect } from "react";
-import { initScrollReveal } from "../utils/scrollReveal";
 import {
   SlSocialFacebook,
   SlSocialGithub,
   SlSocialLinkedin,
 } from "react-icons/sl";
 import { SlSocialTwitter } from "react-icons/sl";
-import { FaFacebook } from "react-icons/fa";
 import { SlSocialInstagram } from "react-icons/sl";
-import { FaGithub } from "react-icons/fa6";
-import { LuGithub } from "react-icons/lu";
 import Typing from "@/app/utils/typing";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
 const Name = () => {
-  // useEffect(() => {
-  //   initScrollReveal(".reveal", {
-  //     duration: 1500,
-  //     origin: "left",
-  //     distance: "10px",
-  //   });
-  //   // initScrollReveal(".revealR", {
-  //   //   duration: 1500,
-  //   //   origin: "right",
-  //   //   distance: "10px",
-  //   // });
-  // }, []);
+
+  const controls = useAnimation();
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      controls.start({
+        x: 0,
+        opacity: 1,
+        transition: { duration: 0.8, ease: "easeInOut" },
+      });
+    } else {
+      controls.start({
+        x: -100,
+        opacity: 0,
+        transition: { duration: 0.8, ease: "easeInOut" },
+      });
+    }
+  }, [controls, inView]);
+ 
 
   const words = [
     {
@@ -36,7 +42,12 @@ const Name = () => {
   ];
 
   return (
-    <div className="w-[80%] sm:max-w-[800px] text-left z-[2] flex flex-col gap-0 p-2">
+    <motion.div
+    ref={ref}
+    initial={{ x: -100, opacity: 0 }}
+    animate={controls}
+    exit={{ opacity: 0 }}
+   className="w-[80%] sm:max-w-[800px] text-left z-[2] flex flex-col gap-0 p-2">
       <h3 className="text-[12px] sm:text-[22px] TextSpecialColor reveal">
         Hello, I'm
       </h3>
@@ -62,7 +73,7 @@ const Name = () => {
       <div className="reveal buttonAnimation flex items-center justify-center rounded-[6px]  bg-teal-400/10 text-sm font-medium leading-5 text-teal-300 mt-2">
         Resume
       </div>
-    </div>
+    </motion.div>
   );
 };
 export default Name;

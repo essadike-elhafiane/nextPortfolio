@@ -33,9 +33,15 @@ const Contact = () => {
   }
 
   return (
-   
-    <form onSubmit={(e: FormEvent<HTMLFormElement>) => sendEmail(e)} className="relative">
-      
+    <form
+      onSubmit={(e: FormEvent<HTMLFormElement>) => sendEmail(e)}
+      className="relative"
+    >
+      <div className="TextColor mt-2 mb-4">
+        I am currently open to new opportunities, and my inbox is always open.
+        Feel free to reach out with questions or just to say hello—I'll respond
+        as soon as I can!
+      </div>
       <div className="inputGroup mb-8 ">
         <input
           name="fullName"

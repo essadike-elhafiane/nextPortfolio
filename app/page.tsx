@@ -44,10 +44,10 @@ export default function Home() {
     const handleScroll = () => {
       // Calculate how far the user has scrolled from the top of the page
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
-  
+
       // Calculate the maximum possible scroll height
       const scrollHeight = document.body.scrollHeight - window.innerHeight;
-  
+
       // Check if the user has scrolled close to the bottom of the page
       if (scrollTop >= scrollHeight - 50 && scrollTop > 0) {
         // User has scrolled close to the bottom, hide the navbar
@@ -57,18 +57,19 @@ export default function Home() {
         setIsNavbarVisible(true);
       }
     };
-  
+
     // Set initial state based on the current scroll position
-    const initialScrollTop = window.scrollY || document.documentElement.scrollTop;
+    const initialScrollTop =
+      window.scrollY || document.documentElement.scrollTop;
     const initialScrollHeight = document.body.scrollHeight - window.innerHeight;
     setIsNavbarVisible(initialScrollTop < initialScrollHeight - 50);
-  
+
     // Add event listener when the component mounts
-    window.addEventListener('scroll', handleScroll);
-  
+    window.addEventListener("scroll", handleScroll);
+
     // Remove event listener when the component unmounts
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -182,7 +183,7 @@ export default function Home() {
 
   return (
     <main className=" min-w-screen flex-col bgColor">
-      <LinksComponenT scroll={isNavbarVisible}/>
+      <LinksComponenT scroll={isNavbarVisible} />
       <div
         className="tracking-effect z-[0]"
         style={{ left: `${position.x - 20}px`, top: `${position.y - 20}px` }}
@@ -213,23 +214,23 @@ export default function Home() {
           >
             <div className="z-[10] w-full flex flex-col justify-center items-center p-2">
               <div className="mt-20 mb-10 flex items-center gap-2">
-                <hr className="w-20 Text" />{" "}
+                <hr className="w-20 border-[var(--text-color--op)]" />{" "}
                 <span className="TextSpecialColor">About me</span>{" "}
-                <hr className="w-20 Text" />
+                <hr className="w-20 border-[var(--text-color--op)]" />
               </div>
               <About />
             </div>
           </section>
           <section
             id="Projects"
-            className="w-[100%] min-h-[100vh]  flex flex-col justify-center items-center"
+            className="w-[100%] min-h-[100vh] flex flex-col justify-center items-center"
           >
             <div className="mb-8  mt-20 flex items-center gap-2 z-10">
-              <hr className="TextColor w-20 " />{" "}
+              <hr className="border-[var(--text-color--op)] w-20  " />{" "}
               <span className="FontMon TextSpecialColor">Projects</span>{" "}
-              <hr className="w-20 TextColor" />
+              <hr className="w-20 border-[var(--text-color--op)]" />
             </div>
-            <Project scroll={showSocials}/>
+            <Project scroll={showSocials} />
           </section>
           <section
             id="Skills"
@@ -241,20 +242,16 @@ export default function Home() {
             id="Contact"
             className="relative h-[100vh] min-h-[900px]  flex flex-col justify-center items-center"
           >
-            <div className="max-w-[700px] w-[80%]">
-              <div className="flex items-center gap-2 ">
-                <hr className="w-20 Text" />{" "}
+            <div className="max-w-[700px] w-[80%] flex flex-col items-center">
+            <div className="mt-20 mb-10 flex items-center gap-2">
+                <hr className="w-20 border-[var(--text-color--op)]" />{" "}
                 <span className="TextSpecialColor">Contact</span>{" "}
-                <hr className="w-20 Text" />
+                <hr className="w-20 border-[var(--text-color--op)]" />
               </div>
-              <div className="TextColor mt-2 mb-4">
-                I am currently open to new opportunities, and my inbox is always
-                open. Feel free to reach out with questions or just to say
-                hello—I'll respond as soon as I can!
-              </div>
+              
               <Contact />
             </div>
-            <footer className="w-[100vw] max-w-[700px] p-10 TextColor bottom-1 absolute  p-2">
+            <footer className="w-[80vw] max-w-[700px] p-10 TextColor bottom-1 absolute  p-2">
               <p>
                 Designed and coded with ❤️ by me. Built with{" "}
                 <a

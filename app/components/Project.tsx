@@ -17,12 +17,12 @@ import { ProjectProps, data } from "./Data";
 
 const PhoneProject = (DATA: ProjectProps) => {
   return (
-    <div className="relative max-w-[90%] z-[5] m-2 mt-6">
+    <div className="relative max-w-[90%] z-[5] m-2 mt-6 border-b pb-10 border-[var(--text-color--op)]">
       <div className="z-[5] justify-center items-center">
         <div className="project-content z-[5]">
           <div className="project-label z-[5]">{DATA.title}</div>
           <h4 className="project-title z-[5]">{DATA.name}</h4>
-          <div className="FontMon TextColor w-[100%] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] ml-[-10px] bg-[#112240] z-[5] p-2 rounded-[5px] mt-[-15px]">
+          <div className="FontMon TextColor w-[100%] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] bg-[#112240] z-[5] p-2 rounded-[5px] mt-[-15px]">
             <p>{DATA.description}</p>
           </div>
           <div>

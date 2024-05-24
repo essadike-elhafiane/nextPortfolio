@@ -119,7 +119,7 @@ body {
   border: 1px solid var(--text-special);
   background-color: transparent;
   border-radius: 10px;
-  width: 90%;
+  width: 100%;
 }
 
 .inputGroup label {
