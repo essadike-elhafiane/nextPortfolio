@@ -8,7 +8,8 @@ import Image from "next/image";
 import { flightRouterStateSchema } from "next/dist/server/app-render/types";
 import { useRouter } from "next/navigation";
 
-const LinksComponent = () => {
+const LinksComponent = (props: {selected: string}) => {
+
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
@@ -31,32 +32,32 @@ const LinksComponent = () => {
       className="absolute mt-[210px] w-[50%] min-w-[60px] max-w-[180px] flex flex-col containerNav z-[100]"
       ref={scope}
     >
-      <a href="#Home" className="text-sm font-medium w-full text-center p-2">
+      <a href="#Home" className={`text-sm font-medium w-full text-center p-2 ${props.selected == "Home" ? "text-[var(--text-special)]" : ''}`}>
         Home
       </a>
-      <a href="#About" className="text-sm font-medium w-full text-center p-2">
+      <a href="#About" className={`text-sm font-medium w-full text-center p-2 ${props.selected == "About" ? "text-[var(--text-special)]" : ''}`}>
         About
       </a>
       <a
-        href="#Services"
-        className="text-sm font-medium w-full text-center p-2"
-      >
-        Services
-      </a>
-      <a
         href="#Projects"
-        className="text-sm font-medium w-full text-center p-2"
+        className={`text-sm font-medium w-full text-center p-2 ${props.selected == "Projects" ? "text-[var(--text-special)]" : ''}`}
       >
         Projects
       </a>
-      <a href="#Contact" className="text-sm font-medium w-full text-center p-2">
+      <a
+        href="#Skills"
+        className={`text-sm font-medium w-full text-center p-2 ${props.selected == "Skills" ? "text-[var(--text-special)]" : ''}`}
+      >
+        Skills
+      </a>
+      <a href="#Contact" className={`text-sm font-medium w-full text-center p-2 ${props.selected == "Contact" ? "text-[var(--text-special)]" : ''}`}>
         Contact
       </a>
     </div>
   );
 };
 
-const LinksComponenT = (props:{ scroll : boolean}) => {
+const LinksComponenT = (props: {scroll : boolean, sectionSelected: string}) => {
   const [navLinks, setNavLinks] = useState(false);
   const [switchNavLinks, setSwitchNavLinks] = useState(true);
   const [scope, animate] = useAnimate();
@@ -121,19 +122,19 @@ const LinksComponenT = (props:{ scroll : boolean}) => {
       />
       {!switchNavLinks ? (
         <div className="flex items-center gap-4" ref={scope}>
-          <a href="#Home" className="text-sm font-medium ">
+          <a href="#Home" className={`text-sm font-medium ${props.sectionSelected == "Home" ? 'ActiveSection' : '' }`}>
             Home
           </a>
-          <a href="#About" className="text-sm font-medium">
+          <a href="#About" className={`text-sm font-medium ${props.sectionSelected == "About" ? 'ActiveSection' : '' }`}>
             About
           </a>
-          <a href="#Projects" className="text-sm font-medium">
+          <a href="#Projects" className={`text-sm font-medium ${props.sectionSelected == "Projects" ? 'ActiveSection' : '' }`}>
             Projects
           </a>
-          <a href="#Skills" className="text-sm font-medium">
+          <a href="#Skills" className={`text-sm font-medium ${props.sectionSelected == "Skills" ? 'ActiveSection' : '' }`}>
             Skills
           </a>
-          <a href="#Contact" className="text-sm font-medium">
+          <a href="#Contact" className={`text-sm font-medium ${props.sectionSelected == "Contact" ? 'ActiveSection' : '' }`}>
             Contact
           </a>
         </div>
@@ -143,7 +144,7 @@ const LinksComponenT = (props:{ scroll : boolean}) => {
             className="w-[25px] h-[25px] "
             onClick={() => setNavLinks(!navLinks)}
           />
-          {navLinks && <LinksComponent />}
+          {navLinks && <LinksComponent selected={props.sectionSelected}/>}
         </>
       )}
     </nav>

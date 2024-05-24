@@ -39,6 +39,7 @@ export default function Home() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [showSocials, setShowSocials] = useState(false);
   const [isNavbarVisible, setIsNavbarVisible] = useState<boolean>(false);
+  const [sectionSelected, setSectionSelected] = useState<string>("Home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,7 +129,26 @@ export default function Home() {
       });
   };
 
+  const handleSectionSlection = () => {
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setSectionSelected(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+  }
+
   useEffect(() => {
+    handleSectionSlection();
     const sections = Array.from(document.querySelectorAll("section"));
     let currentSectionIndex = 0;
     let isScrolling = false;
@@ -147,7 +167,23 @@ export default function Home() {
 
       isScrolling = true;
 
-      sections[currentSectionIndex].scrollIntoView({ behavior: "smooth" });
+      // const modifiedEvent = new WheelEvent("wheel", {
+      //   deltaX: 0,
+      //   deltaY: 0,
+      //   deltaZ: 0,
+      //   clientX: event.clientX,
+      //   clientY: event.clientY,
+      //   screenX: event.screenX,
+      //   screenY: event.screenY,
+      // });
+
+      // if(currentSectionIndex === 3) {
+      //   // Revert to default wheel behavior
+      //   window.scrollBy(modifiedEvent.deltaX, modifiedEvent.deltaY);
+      //   return;
+      // }
+      // else
+        sections[currentSectionIndex].scrollIntoView({ behavior: "smooth" });
 
       setTimeout(() => {
         isScrolling = false; // Allow scrolling again after 500ms
@@ -183,7 +219,7 @@ export default function Home() {
 
   return (
     <main className=" min-w-screen flex-col bgColor">
-      <LinksComponenT scroll={isNavbarVisible} />
+      <LinksComponenT scroll={isNavbarVisible} sectionSelected={sectionSelected} />
       <div
         className="tracking-effect z-[0]"
         style={{ left: `${position.x - 20}px`, top: `${position.y - 20}px` }}
@@ -240,7 +276,7 @@ export default function Home() {
           </section>
           <section
             id="Contact"
-            className="relative h-[100vh] min-h-[980px]  flex flex-col justify-center items-center"
+            className="relative h-[100vh] min-h-[1000px]  flex flex-col justify-center items-center"
           >
             <div className="max-w-[700px] w-[80%] flex flex-col items-center">
             <div className="mt-20 mb-10 flex items-center gap-2">
