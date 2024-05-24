@@ -162,7 +162,7 @@ export default function Home() {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 1030) {
         setShowSocials(false);
       } else {
         setShowSocials(true);
@@ -171,7 +171,7 @@ export default function Home() {
 
     return () => {
       window.removeEventListener("resize", () => {
-        if (window.innerWidth < 768) {
+        if (window.innerWidth < 1030) {
           setShowSocials(false);
         } else {
           setShowSocials(true);
@@ -222,12 +222,12 @@ export default function Home() {
           </section>
           <section
             id="Projects"
-            className="w-[100%] min-h-[100vh] flex flex-col justify-center items-center"
+            className="w-[100%] min-h-[100vh]  flex flex-col justify-center items-center"
           >
-            <div className="mt-20 flex items-center gap-2 z-10">
-              <hr className="w-20 Text" />{" "}
-              <span className="TextSpecialColor">Projects</span>{" "}
-              <hr className="w-20 Text" />
+            <div className="mb-8  mt-20 flex items-center gap-2 z-10">
+              <hr className="TextColor w-20 " />{" "}
+              <span className="FontMon TextSpecialColor">Projects</span>{" "}
+              <hr className="w-20 TextColor" />
             </div>
             <Project scroll={showSocials}/>
           </section>

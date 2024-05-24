@@ -43,18 +43,20 @@ const Contact = () => {
           className="Inputt"
           required
           autoComplete="off"
+          id="fullName"
         />
-        <label htmlFor="name">Full Name</label>
+        <label htmlFor="fullName">Full Name</label>
       </div>
       <div className="inputGroup mb-8 ">
         <input
           type="mail"
           className="Inputt"
           name="email"
+          id="email"
           required
           autoComplete="off"
         />
-        <label htmlFor="name">Email</label>
+        <label htmlFor="email">Email</label>
       </div>
       <div className="inputGroup mb-8 ">
         <textarea
@@ -62,8 +64,9 @@ const Contact = () => {
           className="Inputt max-h-[120px] min-h-[120px]"
           required
           autoComplete="off"
+          id="message"
         />
-        <label htmlFor="name">Message</label>
+        <label htmlFor="message">Message</label>
       </div>
       <button className=" bg-teal-400/10 text-sm font-medium leading-5 text-teal-300">
         <div className="svg-wrapper-1 ">
