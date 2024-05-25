@@ -20,6 +20,7 @@ import { motion, stagger, useAnimate, useInView } from "framer-motion";
 import { FaBars } from "react-icons/fa";
 import LinksComponent from "./components/Nav";
 import LinksComponenT from "./components/Nav";
+import { Container } from "postcss";
 
 const applyAnimation = () => {
   const elements = document.querySelectorAll(".slide-inN");
@@ -166,23 +167,12 @@ export default function Home() {
       }
 
       isScrolling = true;
-
-      // const modifiedEvent = new WheelEvent("wheel", {
-      //   deltaX: 0,
-      //   deltaY: 0,
-      //   deltaZ: 0,
-      //   clientX: event.clientX,
-      //   clientY: event.clientY,
-      //   screenX: event.screenX,
-      //   screenY: event.screenY,
-      // });
-
-      // if(currentSectionIndex === 3) {
-      //   // Revert to default wheel behavior
-      //   window.scrollBy(modifiedEvent.deltaX, modifiedEvent.deltaY);
-      //   return;
-      // }
-      // else
+      if(currentSectionIndex === 3) {
+        // Revert to default wheel behavior
+        window.removeEventListener("wheel", handleScroll);
+        return;
+      }
+      else
         sections[currentSectionIndex].scrollIntoView({ behavior: "smooth" });
 
       setTimeout(() => {
@@ -190,12 +180,13 @@ export default function Home() {
       }, 500);
     };
 
+    
     window.addEventListener("wheel", handleScroll, { passive: false });
 
     return () => {
       window.removeEventListener("wheel", handleScroll);
     };
-  }, []);
+  }, [sectionSelected == "Home"]);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -272,7 +263,20 @@ export default function Home() {
             id="Skills"
             className="w-[100%] min-h-[100vh] flex flex-col justify-center items-center TextColor"
           >
-            <h1 className="z-[5]">Skills</h1>
+            <div className="mb-8  mt-20 flex items-center gap-2 z-10">
+              <hr className="border-[var(--text-color--op)] w-20  " />{" "}
+              <span className="FontMon TextSpecialColor">Skills</span>{" "}
+              <hr className="w-20 border-[var(--text-color--op)]" />
+            </div>
+            <div className="flex gap-8 flex-wrap max-w-[80%] z-[5] ">
+              <div>Tools</div>
+              <div>Languages</div>
+              <div>Framework</div>
+              <div>SoftSkils</div>
+            </div>
+            <div className="mt-8 name w-[80%] max-w-[600px] z-[5]">
+              dfhdfh
+            </div>
           </section>
           <section
             id="Contact"
