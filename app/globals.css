@@ -392,3 +392,12 @@ img {
   background: #efefef;
   text-align: center;
 }
+
+
+.overlay {
+ opacity: .6;
+}
+
+.ConatinerPrj:hover .overlay {
+  opacity: 1;
+}

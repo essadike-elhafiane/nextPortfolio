@@ -57,7 +57,7 @@ const PhoneProject = (DATA: ProjectProps) => {
 
 const ProjectItem = (DATA: ProjectProps) => {
   return (
-    <div className="relative max-w-[1200px] z-[5] m-2 mt-10">
+    <div className="relative max-w-[1200px] z-[5] m-2 mt-10 ConatinerPrj">
       <div className="ml-[-100px] flex z-[5] h-[480px] justify-center items-center">
         <div className="project-content max-w-[900px] z-[5]">
           <div className="project-label z-[5]">{DATA.title}</div>
@@ -89,8 +89,9 @@ const ProjectItem = (DATA: ProjectProps) => {
           <img
             src={DATA.image || "https://via.placeholder.com/150"}
             alt=""
-            className="rounded-[5px] min-w-[580px] h-[400px]  object-cover z-[0] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
+            className="overlay rounded-[5px] opacity-[0.6] min-w-[580px] h-[400px]  object-cover z-[0] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
           />
+          {/* <div className="overlay rounded-[5px] min-w-[580px] h-[400px]  object-cover z-[0] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"></div> */}
         </div>
       </div>
     </div>

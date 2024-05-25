@@ -39,7 +39,7 @@ export const data: ProjectProps[] = [
         "Adminer",
         "Redis",
         "Docker",
-        "VertualBox",
+        "VirtualBox",
         ],
     image: "./Docker.png",
     github: "",

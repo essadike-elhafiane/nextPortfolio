@@ -106,8 +106,8 @@ const LinksComponenT = (props: {scroll : boolean, sectionSelected: string}) => {
   const router = useRouter();
   return (
     <nav
-      className={`z-[1000] pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer 
-       bg-[var(--bg-color)]
+      className={`FontMon font-bold z-[1000] pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer 
+      backdrop-blur-xl backdrop-filter bg-[var(--bg-nav)] ${props.scroll ? "shadow-lg" : ""}
       `}
     >
       <Image

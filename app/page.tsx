@@ -275,7 +275,9 @@ export default function Home() {
               <div>SoftSkils</div>
             </div>
             <div className="mt-8 name w-[80%] max-w-[600px] z-[5]">
-              dfhdfh
+              <div>
+                
+              </div>
             </div>
           </section>
           <section
