@@ -1,26 +1,14 @@
 "use client";
-import Image from "next/image";
+
 import { useEffect, useRef, useState } from "react";
-import {
-  SlSocialFacebook,
-  SlSocialGithub,
-  SlSocialLinkedin,
-} from "react-icons/sl";
-import { SlSocialTwitter } from "react-icons/sl";
-import { FaFacebook } from "react-icons/fa";
-import { SlSocialInstagram } from "react-icons/sl";
-import { FaGithub } from "react-icons/fa6";
 import toast, { Toaster } from "react-hot-toast";
 import About from "./components/aboutme";
 import Project from "./components/Project";
 import Contact from "./components/Contact";
 import Name from "./components/Name";
 import "@/app/circle.css";
-import { motion, stagger, useAnimate, useInView } from "framer-motion";
-import { FaBars } from "react-icons/fa";
-import LinksComponent from "./components/Nav";
 import LinksComponenT from "./components/Nav";
-import { Container } from "postcss";
+import Skills from "./components/Skills";
 
 const applyAnimation = () => {
   const elements = document.querySelectorAll(".slide-inN");
@@ -268,17 +256,7 @@ export default function Home() {
               <span className="FontMon TextSpecialColor">Skills</span>{" "}
               <hr className="w-20 border-[var(--text-color--op)]" />
             </div>
-            <div className="flex gap-8 flex-wrap max-w-[80%] z-[5] ">
-              <div>Tools</div>
-              <div>Languages</div>
-              <div>Framework</div>
-              <div>SoftSkils</div>
-            </div>
-            <div className="mt-8 name w-[80%] max-w-[600px] z-[5]">
-              <div>
-                
-              </div>
-            </div>
+            <Skills scroll={showSocials}/>
           </section>
           <section
             id="Contact"

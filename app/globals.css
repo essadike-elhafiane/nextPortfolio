@@ -253,7 +253,7 @@ button:active {
 }
 
 .containerNav a:hover{
-  color: var(--text-special);
+  /* color: var(--text-special); */
   border-bottom: none;
   min-width: 130px;
   font-weight: 100;
