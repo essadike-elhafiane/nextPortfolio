@@ -249,9 +249,9 @@ export default function Home() {
           </section>
           <section
             id="Skills"
-            className="w-[100%] min-h-[100vh] flex flex-col justify-center items-center TextColor"
+            className="w-[100%] h-[100vh] min-h-[1400px] flex flex-col justify-center items-center TextColor "
           >
-            <div className="mb-8  mt-20 flex items-center gap-2 z-10">
+            <div className="mb-8 flex items-center gap-2 z-10  ">
               <hr className="border-[var(--text-color--op)] w-20  " />{" "}
               <span className="FontMon TextSpecialColor">Skills</span>{" "}
               <hr className="w-20 border-[var(--text-color--op)]" />

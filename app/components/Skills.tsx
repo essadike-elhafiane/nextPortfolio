@@ -2,14 +2,47 @@ import React, { useState } from "react";
 
 const Languages = () => {
   return (
-    <div className="SlideAnimation">
-      <h1 className="md:text-xl text-white">C Programming</h1>
-      <p>
-        C is a foundational programming language known for its
-        efficiency and control over system resources. I've used C in various
-        projects, including developing a custom shell, implementing a custom
-        malloc. I've also explored advanced concepts like pointers, memory
-        management, and multithreading.
+    <div className="SlideAnimation ">
+      <h1 className="md:text-xl text-white">JavaScript</h1>
+      <p className="FontMon mt-4">
+        TypeScript extends JavaScript by adding types to the language. It helps
+        catch errors early through a syntax closely related to JavaScript. I
+        leveraged TypeScript to develop the front-end for a web-based Pong game,
+        enhancing the development experience with static type checking and
+        advanced object-oriented features. This project showcased the ability to
+        build interactive web applications with improved code quality and
+        maintainability.
+      </p>
+      <h1 className="md:text-xl text-white mt-4">TypeScript</h1>
+      <p className="FontMon mt-4">
+        TypeScript extends JavaScript by adding types to the language. It helps
+        catch errors early through a syntax closely related to JavaScript. I
+        leveraged TypeScript to develop the front-end for a web-based Pong game,
+        enhancing the development experience with static type checking and
+        advanced object-oriented features. This project showcased the ability to
+        build interactive web applications with improved code quality and
+        maintainability.
+      </p>
+      <h1 className="md:text-xl text-white mt-4">C Programming</h1>
+      <p className="FontMon mt-4">
+        C is a foundational programming language known for its efficiency and
+        control over system resources. I've used C in various projects,
+        including developing a{" "}
+        <span className="TextSpecialColor">custom shell</span>, implementing a
+        custom
+        <span className="TextSpecialColor"> malloc </span> . I've also explored
+        advanced concepts like <span className="TextSpecialColor"></span>
+        pointers, <span className="TextSpecialColor">memory management</span>,
+        and <span className="TextSpecialColor">multithreading</span>.
+      </p>
+      <h1 className="md:text-xl text-white mt-4">C++ Programming</h1>
+      <p className="FontMon mt-4">
+        I've utilized C++ in various projects, focusing on creating efficient,
+        scalable applications and exploring advanced concepts like templates and
+        the Standard Template Library (STL). I Developed a lightweight,
+        high-performance web server using C++. This project focused on
+        understanding and implementing HTTP protocols, socket programming, and
+        asynchronous IO operations.
       </p>
     </div>
   );
@@ -18,21 +51,42 @@ const Languages = () => {
 const Tools = () => {
   return (
     <div className="SlideAnimation w-full">
-      <div className="flex  ">
-        <div className="flex-1">Git</div>
-        <div className="flex-1">Docker</div>
-        <div className="flex-1">Postman</div>
-      </div>
-      <div className="flex">
-        <div className="flex-1">Jira</div>
-        <div className="flex-1">Confluence</div>
-        <div className="flex-1">Slack</div>
-      </div>
-      <div className="flex">
-        <div className="flex-1">Figma</div>
-        <div className="flex-1">Adobe XD</div>
-        <div className="flex-1">Illustrator</div>
-      </div>
+      <h1 className="md:text-xl text-white">Git/Github</h1>
+      <p className="FontMon mt-4">
+        I've utilized C++ in various projects, focusing on creating efficient,
+        scalable applications and exploring advanced concepts like templates and
+        the Standard Template Library (STL). I Developed a lightweight,
+        high-performance web server using C++. This project focused on
+        understanding and implementing HTTP protocols, socket programming, and
+        asynchronous IO operations.
+      </p>
+      <h1 className="md:text-xl text-white mt-4">Docker/Docker-compose</h1>
+      <p className="FontMon mt-4">
+        I've utilized C++ in various projects, focusing on creating efficient,
+        scalable applications and exploring advanced concepts like templates and
+        the Standard Template Library (STL). I Developed a lightweight,
+        high-performance web server using C++. This project focused on
+        understanding and implementing HTTP protocols, socket programming, and
+        asynchronous IO operations.
+      </p>
+      <h1 className="md:text-xl text-white mt-4">VirtualBox</h1>
+      <p className="FontMon mt-4">
+        I've utilized C++ in various projects, focusing on creating efficient,
+        scalable applications and exploring advanced concepts like templates and
+        the Standard Template Library (STL). I Developed a lightweight,
+        high-performance web server using C++. This project focused on
+        understanding and implementing HTTP protocols, socket programming, and
+        asynchronous IO operations.
+      </p>
+      <h1 className="md:text-xl text-white mt-4">PostMan</h1>
+      <p className="FontMon mt-4">
+        I've utilized C++ in various projects, focusing on creating efficient,
+        scalable applications and exploring advanced concepts like templates and
+        the Standard Template Library (STL). I Developed a lightweight,
+        high-performance web server using C++. This project focused on
+        understanding and implementing HTTP protocols, socket programming, and
+        asynchronous IO operations.
+      </p>
     </div>
   );
 };
@@ -40,21 +94,33 @@ const Tools = () => {
 const Framework = () => {
   return (
     <div className="SlideAnimation">
-      <div className="flex">
-        <div className="flex-1">React</div>
-        <div className="flex-1">Angular</div>
-        <div className="flex-1">Vue</div>
-      </div>
-      <div className="flex">
-        <div className="flex-1">Node</div>
-        <div className="flex-1">Express</div>
-        <div className="flex-1">Flask</div>
-      </div>
-      <div className="flex">
-        <div className="flex-1">Django</div>
-        <div className="flex-1">Spring</div>
-        <div className="flex-1">Hibernate</div>
-      </div>
+       <h1 className="md:text-xl text-white mt-4">React</h1>
+      <p className="FontMon mt-4">
+        I've utilized C++ in various projects, focusing on creating efficient,
+        scalable applications and exploring advanced concepts like templates and
+        the Standard Template Library (STL). I Developed a lightweight,
+        high-performance web server using C++. This project focused on
+        understanding and implementing HTTP protocols, socket programming, and
+        asynchronous IO operations.
+      </p>
+      <h1 className="md:text-xl text-white mt-4">Next.js</h1>
+      <p className="FontMon mt-4">
+        I've utilized C++ in various projects, focusing on creating efficient,
+        scalable applications and exploring advanced concepts like templates and
+        the Standard Template Library (STL). I Developed a lightweight,
+        high-performance web server using C++. This project focused on
+        understanding and implementing HTTP protocols, socket programming, and
+        asynchronous IO operations.
+      </p>
+      <h1 className="md:text-xl text-white mt-4">Nest.Js</h1>
+      <p className="FontMon mt-4">
+        I've utilized C++ in various projects, focusing on creating efficient,
+        scalable applications and exploring advanced concepts like templates and
+        the Standard Template Library (STL). I Developed a lightweight,
+        high-performance web server using C++. This project focused on
+        understanding and implementing HTTP protocols, socket programming, and
+        asynchronous IO operations.
+      </p>
     </div>
   );
 };
@@ -66,7 +132,7 @@ const Skills = (props: { scroll: boolean }) => {
     <div
       className={`flex w-[90vw] ${
         !props.scroll ? "flex-col items-center" : "mt-20"
-      } z-[5]   justify-cenetr max-w-[800px] h-[100%]`}
+      } z-[5]   max-w-[800px]  `}
     >
       <div
         className={`FontMon flex ${
@@ -121,7 +187,7 @@ const Skills = (props: { scroll: boolean }) => {
       <div
         className={`name ${
           props.scroll ? "w-[80%]" : "w-[100%]"
-        } h-[400px]  z-[5] p-4`}
+        } h-[700px]  z-[5] p-4`}
       >
         {selected == "Languages" && <Languages />}
         {selected == "Tools" && <Tools />}
