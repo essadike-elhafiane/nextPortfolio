@@ -401,3 +401,54 @@ img {
 .ConatinerPrj:hover .overlay {
   opacity: 1;
 }
+
+.Clicked{
+  padding: 0.8em 2em;
+  border-bottom: 2px solid transparent;
+  border-left: 2px solid transparent;
+}
+
+.Clicked:hover{
+  color: var(--text-special);
+  background-color: #112240;
+  padding: 0.8em 2em;
+}
+
+.SelectedSkillsP{
+  color: var(--text-special);
+  background-color: #112240;
+  border-bottom: 2px solid var(--text-special);
+  transition: all .5s ease;
+}
+
+.SelectedSkills{
+  color: var(--text-special);
+  background-color: #112240;
+  border-left: 2px solid var(--text-special);
+  transition: all .5s ease;
+}
+
+.borderBottom{
+  border-bottom: 2px solid #112240;
+}
+
+.borderLeft{
+  border-left: 2px solid #112240;
+}
+
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.SlideAnimation {
+  opacity: 0; /* Start with opacity 0 */
+  animation: slideInFromLeft 0.5s ease forwards; /* Apply the animation */
+}
