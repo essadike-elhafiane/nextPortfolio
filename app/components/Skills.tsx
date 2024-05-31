@@ -23,6 +23,30 @@ const Languages = () => {
         build interactive web applications with improved code quality and
         maintainability.
       </p>
+      <h1 className="md:text-xl text-white mt-4">C++ Programming</h1>
+      <p className="FontMon mt-4">
+        I've utilized C++ in various projects, focusing on creating efficient,
+        scalable applications and exploring advanced concepts like templates and
+        the{" "}
+        <span className="TextSpecialColor">
+          Standard Template Library (STL)
+        </span>
+        . I Developed a lightweight, high-performance{" "}
+        <span className="TextSpecialColor">web server</span> using C++. This
+        project focused on understanding and implementing{" "}
+        <span className="TextSpecialColor cool-link">
+          {" "}
+          <a
+            href="https://www.instagram.com/essadike_elhafiane/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            HTTP protocols
+          </a>
+        </span>
+        , <span className="TextSpecialColor">socket programming</span>, and
+        <span className="TextSpecialColor"> asynchronous IO operations</span>.
+      </p>
       <h1 className="md:text-xl text-white mt-4">C Programming</h1>
       <p className="FontMon mt-4">
         C is a foundational programming language known for its efficiency and
@@ -35,15 +59,6 @@ const Languages = () => {
         pointers, <span className="TextSpecialColor">memory management</span>,
         and <span className="TextSpecialColor">multithreading</span>.
       </p>
-      <h1 className="md:text-xl text-white mt-4">C++ Programming</h1>
-      <p className="FontMon mt-4">
-        I've utilized C++ in various projects, focusing on creating efficient,
-        scalable applications and exploring advanced concepts like templates and
-        the Standard Template Library (STL). I Developed a lightweight,
-        high-performance web server using C++. This project focused on
-        understanding and implementing HTTP protocols, socket programming, and
-        asynchronous IO operations.
-      </p>
     </div>
   );
 };
@@ -55,10 +70,16 @@ const Tools = () => {
       <p className="FontMon mt-4">
         I've utilized C++ in various projects, focusing on creating efficient,
         scalable applications and exploring advanced concepts like templates and
-        the Standard Template Library (STL). I Developed a lightweight,
-        high-performance web server using C++. This project focused on
-        understanding and implementing HTTP protocols, socket programming, and
-        asynchronous IO operations.
+        the{" "}
+        <span className="TextSpecialColor">
+          Standard Template Library (STL)
+        </span>
+        . I Developed a lightweight, high-performance{" "}
+        <span className="TextSpecialColor">web server</span> using C++. This
+        project focused on understanding and implementing{" "}
+        <span className="TextSpecialColor">HTTP protocols</span>,{" "}
+        <span className="TextSpecialColor">socket programming</span>, and
+        <span className="TextSpecialColor">asynchronous IO operations</span>.
       </p>
       <h1 className="md:text-xl text-white mt-4">Docker/Docker-compose</h1>
       <p className="FontMon mt-4">
@@ -94,7 +115,7 @@ const Tools = () => {
 const Framework = () => {
   return (
     <div className="SlideAnimation">
-       <h1 className="md:text-xl text-white mt-4">React</h1>
+      <h1 className="md:text-xl text-white mt-4">React</h1>
       <p className="FontMon mt-4">
         I've utilized C++ in various projects, focusing on creating efficient,
         scalable applications and exploring advanced concepts like templates and

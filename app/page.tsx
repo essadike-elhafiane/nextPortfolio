@@ -178,7 +178,7 @@ export default function Home() {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      if (window.innerWidth < 1030) {
+      if (window.innerWidth < 1100) {
         setShowSocials(false);
       } else {
         setShowSocials(true);
@@ -187,7 +187,7 @@ export default function Home() {
 
     return () => {
       window.removeEventListener("resize", () => {
-        if (window.innerWidth < 1030) {
+        if (window.innerWidth < 1100) {
           setShowSocials(false);
         } else {
           setShowSocials(true);

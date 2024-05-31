@@ -315,7 +315,7 @@ img {
   
 }
 
-.project {
+/* .project {
   margin: 30px;
   display: grid;
   grid-gap: 10px;
@@ -326,17 +326,9 @@ img {
   @media screen and (max-width: 768px) {
     align-items: flex-start;
   }
-}
+} */
 
-.project-content {
-  position: relative;
-  grid-column: 1 / 7;
-  grid-row: 1 / -1;
 
-  @include tablet {
-    grid-column: 1 / -1;
-    padding: 40px;
-  }
 
   .project-label {
     color: #64ffda;
@@ -347,51 +339,7 @@ img {
     margin: 10px 0 30px;
     color: #eee;
   }
-  .project-details {
-    font-size: 15px;
-    line-height: 1.5;
-    color: #aaa;
 
-    p {
-      background-color: #252525;
-      padding: 20px 25px;
-      @include tablet {
-        background-color: transparent;
-        padding: 20px 0;
-      }
-    }
-
-    ul {
-      display: flex;
-      margin-top: 20px;
-
-      li {
-        margin-right: 20px;
-        color: #aaa;
-        font-family: monospace;
-      }
-    }
-  }
-}
-
-
-
-
-.each-slide-effect > div {
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: cover;
-  height: 350px;
-}
-
-.each-slide-effect span {
-  padding: 20px;
-  font-size: 20px;
-  background: #efefef;
-  text-align: center;
-}
 
 
 .overlay {
@@ -451,4 +399,24 @@ img {
 .SlideAnimation {
   opacity: 0; /* Start with opacity 0 */
   animation: slideInFromLeft 0.5s ease forwards; /* Apply the animation */
+}
+
+.cool-link {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cool-link::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--text-special);
+  transition: width .3s;
+}
+
+.cool-link:hover::after {
+  width: 100%;
+  transition: width .3s;
 }
