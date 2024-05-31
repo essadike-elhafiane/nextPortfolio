@@ -129,7 +129,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
 
     sections.forEach((section) => {
@@ -156,7 +156,9 @@ export default function Home() {
       }
 
       isScrolling = true;
-      if(currentSectionIndex === 3) {
+      const isChrome = navigator.userAgent.includes("Chrome");
+
+      if(currentSectionIndex === 3 || !isChrome) {
         // Revert to default wheel behavior
         window.removeEventListener("wheel", handleScroll);
         return;
@@ -168,10 +170,7 @@ export default function Home() {
         isScrolling = false; // Allow scrolling again after 500ms
       }, 500);
     };
-
-    
     window.addEventListener("wheel", handleScroll, { passive: false });
-
     return () => {
       window.removeEventListener("wheel", handleScroll);
     };
@@ -246,7 +245,7 @@ export default function Home() {
           </section>
           <section
             id="Projects"
-            className="w-[100%] min-h-[100vh] flex flex-col justify-center items-center"
+            className=" w-[100%] min-h-[100vh] flex flex-col justify-center items-center"
           >
             <div className="mb-8  mt-20 flex items-center  gap-2 z-10 w-[80%] max-w-[800px]">
               <h1 className="TextSpecialColor text-[20px]">02.</h1>
@@ -281,7 +280,7 @@ export default function Home() {
             </div>
             <footer className="w-[80vw] max-w-[700px] p-10 TextColor bottom-1 absolute  p-2">
               <p>
-                Designed and coded with ❤️ by me. Built with{" "}
+                Designed and coded by me. Built with{" "}
                 <a
                   className="TextNormalColor"
                   href="https://nextjs.org/"
@@ -310,16 +309,7 @@ export default function Home() {
                 >
                   Vercel
                 </a>
-                . All content is styled in the{" "}
-                <a
-                  className="TextNormalColor"
-                  href="https://fonts.google.com/specimen/Inter"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Poppins font
-                </a>
-                . © 2024 Essadike Elhafiane. All rights reserved.
+                . © 2024 Essadike Elhafiane.
               </p>
             </footer>
           </section>

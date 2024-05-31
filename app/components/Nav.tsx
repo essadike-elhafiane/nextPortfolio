@@ -104,9 +104,11 @@ const LinksComponenT = (props: {scroll : boolean, sectionSelected: string}) => {
     };
   }, [scope, animate, switchNavLinks]);
   const router = useRouter();
+
+
   return (
     <nav
-      className={`FontMon font-bold z-[1000] pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer 
+      className={`z-[1000] font-extrabold pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer 
       backdrop-blur-xl backdrop-filter bg-[var(--bg-nav)] ${props.scroll ? "shadow-lg" : ""}
       `}
     >
@@ -120,6 +122,8 @@ const LinksComponenT = (props: {scroll : boolean, sectionSelected: string}) => {
         
         onClick={() => router.push("/#Home")}
       />
+
+
       {!switchNavLinks ? (
         <div className="flex items-center gap-4" ref={scope}>
           <a href="#Home" className={`text-sm font-medium ${props.sectionSelected == "Home" ? 'ActiveSection' : '' }`}>

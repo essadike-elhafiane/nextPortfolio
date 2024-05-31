@@ -167,7 +167,6 @@ const Project = (props: { scroll: boolean }) => {
                 />
               );
             })}
-            {/* <ProjectItem /> */}
           </React.Fragment>
         )}
       </motion.div>
