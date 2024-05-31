@@ -29,6 +29,7 @@ export default function Home() {
   const [showSocials, setShowSocials] = useState(false);
   const [isNavbarVisible, setIsNavbarVisible] = useState<boolean>(false);
   const [sectionSelected, setSectionSelected] = useState<string>("Home");
+  const [res, setRes] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -179,18 +180,18 @@ export default function Home() {
   useEffect(() => {
     window.addEventListener("resize", () => {
       if (window.innerWidth < 1100) {
-        setShowSocials(false);
+       setRes(false)
       } else {
-        setShowSocials(true);
+        setRes(true)
       }
     });
 
     return () => {
       window.removeEventListener("resize", () => {
         if (window.innerWidth < 1100) {
-          setShowSocials(false);
+         setRes(false)
         } else {
-          setShowSocials(true);
+          setRes(true)
         }
       });
     };
@@ -245,7 +246,7 @@ export default function Home() {
               <span className="FontMon TextSpecialColor">Projects</span>{" "}
               <hr className="w-20 border-[var(--text-color--op)]" />
             </div>
-            <Project scroll={showSocials} />
+            <Project scroll={res} />
           </section>
           <section
             id="Skills"
@@ -256,7 +257,7 @@ export default function Home() {
               <span className="FontMon TextSpecialColor">Skills</span>{" "}
               <hr className="w-20 border-[var(--text-color--op)]" />
             </div>
-            <Skills scroll={showSocials}/>
+            <Skills scroll={res}/>
           </section>
           <section
             id="Contact"
