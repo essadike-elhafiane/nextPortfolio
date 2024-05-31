@@ -17,7 +17,7 @@ import { ProjectProps, data } from "./Data";
 
 const PhoneProject = (DATA: ProjectProps) => {
   return (
-    <div className="relative max-w-[90%] z-[5] m-2 mt-6 border-b pb-10 border-[var(--text-color--op)]">
+    <div className="relative max-w-[90%] z-[5] m-2 mt-6 border-b pb-10 border-[#233554]">
       <div className="z-[5] justify-center items-center">
         <div className="project-content z-[5]">
           <div className="project-label z-[5]">{DATA.title}</div>

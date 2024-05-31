@@ -229,11 +229,11 @@ export default function Home() {
             className="w-full min-h-[100vh] flex justify-center items-center"
           >
             <div className="z-[10] w-full flex flex-col justify-center items-center p-2">
-              <div className="mt-20 mb-10 flex items-center gap-2">
-                <hr className="w-20 border-[var(--text-color--op)]" />{" "}
-                <span className="TextSpecialColor">About me</span>{" "}
-                <hr className="w-20 border-[var(--text-color--op)]" />
-              </div>
+            <div className="mb-8  mt-20 flex items-center  gap-2 z-10 w-[80%] max-w-[500px]">
+              <h1 className="TextSpecialColor text-[20px]">01.</h1>
+              <span className="FontMon p-4 text-[20px] min-w-[130px]">About me</span>{" "}
+              <hr className="w-full border-[#233554]" />
+            </div>
               <About />
             </div>
           </section>
@@ -241,10 +241,10 @@ export default function Home() {
             id="Projects"
             className="w-[100%] min-h-[100vh] flex flex-col justify-center items-center"
           >
-            <div className="mb-8  mt-20 flex items-center gap-2 z-10">
-              <hr className="border-[var(--text-color--op)] w-20  " />{" "}
-              <span className="FontMon TextSpecialColor">Projects</span>{" "}
-              <hr className="w-20 border-[var(--text-color--op)]" />
+            <div className="mb-8  mt-20 flex items-center  gap-2 z-10 w-[80%] max-w-[800px]">
+              <h1 className="TextSpecialColor text-[20px]">02.</h1>
+              <span className="FontMon p-4 text-[20px]">Projects</span>{" "}
+              <hr className="w-full border-[#233554]" />
             </div>
             <Project scroll={res} />
           </section>
@@ -252,10 +252,10 @@ export default function Home() {
             id="Skills"
             className="w-[100%] h-[100vh] min-h-[1400px] flex flex-col justify-center items-center TextColor "
           >
-            <div className="mb-8 flex items-center gap-2 z-10  ">
-              <hr className="border-[var(--text-color--op)] w-20  " />{" "}
-              <span className="FontMon TextSpecialColor">Skills</span>{" "}
-              <hr className="w-20 border-[var(--text-color--op)]" />
+            <div className="mb-8  mt-20 flex items-center  gap-2 z-10 w-[80%] max-w-[800px]">
+              <h1 className="TextSpecialColor text-[20px]">03.</h1>
+              <span className="FontMon p-4 text-[20px] text-white">Skills</span>{" "}
+              <hr className="w-full border-[#233554]" />
             </div>
             <Skills scroll={res}/>
           </section>
@@ -264,11 +264,11 @@ export default function Home() {
             className="relative h-[100vh] min-h-[1000px]  flex flex-col justify-center items-center"
           >
             <div className="max-w-[700px] w-[80%] flex flex-col items-center">
-            <div className="mt-20 mb-10 flex items-center gap-2">
-                <hr className="w-20 border-[var(--text-color--op)]" />{" "}
-                <span className="TextSpecialColor">Contact</span>{" "}
-                <hr className="w-20 border-[var(--text-color--op)]" />
-              </div>
+            <div className="mb-8  mt-20 flex items-center  gap-2 z-10 w-[80%] max-w-[800px]">
+              <h1 className="TextSpecialColor text-[20px]">04.</h1>
+              <span className="FontMon p-4 text-[20px] text-white">Contact</span>{" "}
+              <hr className="w-full border-[#233554]" />
+            </div>
               
               <Contact />
             </div>
