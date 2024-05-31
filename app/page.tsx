@@ -178,6 +178,13 @@ export default function Home() {
   }, [sectionSelected == "Home"]);
 
   useEffect(() => {
+
+    if (window.innerWidth < 1100) {
+      setRes(false)
+     } else {
+       setRes(true)
+     }
+   
     window.addEventListener("resize", () => {
       if (window.innerWidth < 1100) {
        setRes(false)
