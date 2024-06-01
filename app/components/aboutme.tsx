@@ -27,7 +27,7 @@ const About = () => {
   return (
     <motion.div
       ref={ref}
-      className="flex flex-col justify-center items-center w-[90%] max-w-[600px] z-10 TextColor p-2"
+      className="FontMon flex flex-col justify-center items-center w-[90%] max-w-[600px] z-10 TextColor p-2"
       initial={{ x: 100, opacity: 0 }}
       animate={controls}
       exit={{ opacity: 0 }}

@@ -35,9 +35,9 @@ const Contact = () => {
   return (
     <form
       onSubmit={(e: FormEvent<HTMLFormElement>) => sendEmail(e)}
-      className="relative"
+      className="relative FontMon"
     >
-      <div className="TextColor mt-2 mb-4">
+      <div className="TextColor mt-2 mb-4 ">
         I am currently open to new opportunities, and my inbox is always open.
         Feel free to reach out with questions or just to say hello—I'll respond
         as soon as I can!

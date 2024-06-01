@@ -114,11 +114,11 @@ const LinksComponenT = (props: {scroll : boolean, sectionSelected: string}) => {
     >
       <Image
         priority
-        className={`cursor-pointer ${"w-[100px] h-[100px]"} `}
+        className={`cursor-pointer  ${!switchNavLinks? "w-[100px] h-[100px]" : "w-[70px] h-[70px]"}`}
         src="./ES.svg"
         alt="logo"
-        width={100}
-        height={100}
+        width={!switchNavLinks? 100 : 70}
+        height={!switchNavLinks? 100 : 70}
         
         onClick={() => router.push("/#Home")}
       />

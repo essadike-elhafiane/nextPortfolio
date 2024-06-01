@@ -278,7 +278,9 @@ export default function Home() {
               
               <Contact />
             </div>
-            <footer className="w-[80vw] max-w-[700px] p-10 TextColor bottom-1 absolute  p-2">
+
+
+            <footer className="FontMon w-[80vw] max-w-[700px] p-10 TextColor bottom-1 absolute  p-2">
               <p>
                 Designed and coded by me. Built with{" "}
                 <a
