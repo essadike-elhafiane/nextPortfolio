@@ -206,10 +206,10 @@ export default function Home() {
   return (
     <main className=" min-w-screen flex-col bgColor">
       <LinksComponenT scroll={isNavbarVisible} sectionSelected={sectionSelected} />
-      <div
+      {res && <div
         className="tracking-effect z-[0]"
         style={{ left: `${position.x - 20}px`, top: `${position.y - 20}px` }}
-      ></div>
+      ></div>}
       <Toaster
         position="top-center"
         containerStyle={{
