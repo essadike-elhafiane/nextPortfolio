@@ -126,7 +126,7 @@ export default function Home() {
     let isMobileDevice = false;
     if (window.innerWidth < 1100)
         isMobileDevice = true;
-    const threshold = isMobileDevice ? 0.2 : 0.5;
+    const threshold = isMobileDevice ? 0.2 : 0.43;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -148,7 +148,7 @@ export default function Home() {
 
   useEffect(() => {
     handleSectionSlection();
-  }, [window.innerWidth]);
+  }, []);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll("section"));
@@ -170,7 +170,7 @@ export default function Home() {
       isScrolling = true;
       const isChrome = navigator.userAgent.includes("Chrome");
 
-      if(currentSectionIndex === 3 || !isChrome) {
+      if((currentSectionIndex != 1 && currentSectionIndex != 2) || !isChrome) {
         // Revert to default wheel behavior
         window.removeEventListener("wheel", handleScroll);
         return;
