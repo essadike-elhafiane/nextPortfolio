@@ -270,7 +270,7 @@ export default function Home() {
           </section>
           <section
             id="Skills"
-            className="w-[100%] h-[100vh] min-h-[1400px] flex flex-col justify-center items-center TextColor "
+            className="w-[100%] h-[100vh] min-h-[1600px] flex flex-col justify-center items-center TextColor "
           >
             <div className="mb-8  mt-20 flex items-center  gap-2 z-10 w-[80%] max-w-[800px]">
               <h1 className="TextSpecialColor text-[20px]">03.</h1>
