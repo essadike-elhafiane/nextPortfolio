@@ -10,6 +10,7 @@ import "@/app/circle.css";
 import LinksComponenT from "./components/Nav";
 import Skills from "./components/Skills";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
+import { isMainThread } from "worker_threads";
 
 const applyAnimation = () => {
   const elements = document.querySelectorAll(".slide-inN");
@@ -122,6 +123,10 @@ export default function Home() {
 
   const handleSectionSlection = () => {
     const sections = document.querySelectorAll("section");
+    let isMobileDevice = false;
+    if (window.innerWidth < 1100)
+        isMobileDevice = true;
+    const threshold = isMobileDevice ? 0.2 : 0.5;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -130,18 +135,20 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.20}
+      { threshold: threshold}
     );
   
     sections.forEach((section) => {
       observer.observe(section);
     });
-  
-    // Cleanup function
     return () => {
       observer.disconnect();
     };
   }
+
+  useEffect(() => {
+    handleSectionSlection();
+  }, [window.innerWidth]);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll("section"));
@@ -182,7 +189,7 @@ export default function Home() {
   }, [sectionSelected == "Home"]);
 
   useEffect(() => {
-    handleSectionSlection();
+    
     if (window.innerWidth < 1100) {
       setRes(false)
      } else {
@@ -227,7 +234,7 @@ export default function Home() {
       />
       <div
         ref={containerRef}
-        className="min-w-screen h-[100vh] overflow-scroll z-[1] overflow-x-hidden scroll-smooth flex justify-center "
+        className="min-w-screen h-[100vh] overflow-scroll overflow-hidden z-[1] overflow-x-hidden scroll-smooth flex justify-center "
       >
         <div>
           <section
