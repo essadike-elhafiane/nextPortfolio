@@ -233,7 +233,7 @@ export default function Home() {
           <section
             
             id="Home"
-            className="min-h-[100vh] w-full flex flex-col gap-8 justify-center items-center bg-red-500/10"
+            className="min-h-[100vh] w-full flex flex-col gap-8 justify-center items-center"
           >
             <Name  />
           </section>
