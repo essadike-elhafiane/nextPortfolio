@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import About from "./components/aboutme";
 import Project from "./components/Project";
@@ -9,6 +9,7 @@ import Name from "./components/Name";
 import "@/app/circle.css";
 import LinksComponenT from "./components/Nav";
 import Skills from "./components/Skills";
+import { useIntersectionObserver } from "@uidotdev/usehooks";
 
 const applyAnimation = () => {
   const elements = document.querySelectorAll(".slide-inN");
@@ -129,16 +130,20 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.43 }
+      { threshold: 0.20}
     );
-
+  
     sections.forEach((section) => {
       observer.observe(section);
     });
+  
+    // Cleanup function
+    return () => {
+      observer.disconnect();
+    };
   }
 
   useEffect(() => {
-    handleSectionSlection();
     const sections = Array.from(document.querySelectorAll("section"));
     let currentSectionIndex = 0;
     let isScrolling = false;
@@ -177,7 +182,7 @@ export default function Home() {
   }, [sectionSelected == "Home"]);
 
   useEffect(() => {
-
+    handleSectionSlection();
     if (window.innerWidth < 1100) {
       setRes(false)
      } else {
@@ -203,6 +208,7 @@ export default function Home() {
     };
   }, []);
 
+
   return (
     <main className=" min-w-screen flex-col bgColor">
       <LinksComponenT scroll={isNavbarVisible} sectionSelected={sectionSelected} />
@@ -225,10 +231,11 @@ export default function Home() {
       >
         <div>
           <section
+            
             id="Home"
-            className="min-h-[100vh] w-full flex flex-col gap-8 justify-center items-center "
+            className="min-h-[100vh] w-full flex flex-col gap-8 justify-center items-center bg-red-500/10"
           >
-            <Name />
+            <Name  />
           </section>
           <section
             id="About"
@@ -247,7 +254,7 @@ export default function Home() {
             id="Projects"
             className=" w-[100%] min-h-[100vh] flex flex-col justify-center items-center"
           >
-            <div className="mb-8  mt-20 flex items-center  gap-2 z-10 w-[80%] max-w-[800px]">
+            <div className="mb-8  mt-20 flex items-center  gap-2 z-10 w-[80%] max-w-[800px] ">
               <h1 className="TextSpecialColor text-[20px]">02.</h1>
               <span className="FontMon p-4 text-[20px]">Projects</span>{" "}
               <hr className="w-full border-[#233554]" />
@@ -267,7 +274,7 @@ export default function Home() {
           </section>
           <section
             id="Contact"
-            className="relative h-[100vh] min-h-[1000px]  flex flex-col justify-center items-center"
+            className="relative h-[100vh] min-h-[1200px]  flex flex-col justify-center items-center"
           >
             <div className="max-w-[700px] w-[80%] flex flex-col items-center">
             <div className="mb-8  mt-20 flex items-center  gap-2 z-10 w-[80%] max-w-[800px]">

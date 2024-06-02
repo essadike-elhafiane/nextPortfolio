@@ -5,8 +5,8 @@ import { motion, stagger, useAnimate } from "framer-motion";
 import "@/app/globals.css";
 import { FaBars } from "react-icons/fa";
 import Image from "next/image";
-import { flightRouterStateSchema } from "next/dist/server/app-render/types";
 import { useRouter } from "next/navigation";
+import { useClickAway } from "@uidotdev/usehooks";
 
 const LinksComponent = (props: {selected: string}) => {
 
@@ -148,7 +148,7 @@ const LinksComponenT = (props: {scroll : boolean, sectionSelected: string}) => {
             className="w-[25px] h-[25px] "
             onClick={() => setNavLinks(!navLinks)}
           />
-          {navLinks && <LinksComponent selected={props.sectionSelected}/>}
+          {navLinks && <LinksComponent selected={props.sectionSelected} />}
         </>
       )}
     </nav>
