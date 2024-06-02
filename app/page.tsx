@@ -129,7 +129,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.55 }
+      { threshold: 0.43 }
     );
 
     sections.forEach((section) => {
