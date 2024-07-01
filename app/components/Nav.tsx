@@ -8,8 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useClickAway } from "@uidotdev/usehooks";
 
-const LinksComponent = (props: {selected: string}) => {
-
+const LinksComponent = (props: { selected: string }) => {
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
@@ -32,32 +31,54 @@ const LinksComponent = (props: {selected: string}) => {
       className="absolute mt-[210px] w-[50%] min-w-[60px] max-w-[180px] flex flex-col containerNav z-[100]"
       ref={scope}
     >
-      <a href="#Home" className={`text-sm font-medium w-full text-center p-2 ${props.selected == "Home" ? "text-[var(--text-special)]" : ''}`}>
+      <a
+        href="#Home"
+        className={`text-sm font-medium w-full text-center p-2 ${
+          props.selected == "Home" ? "text-[var(--text-special)]" : ""
+        }`}
+      >
         Home
       </a>
-      <a href="#About" className={`text-sm font-medium w-full text-center p-2 ${props.selected == "About" ? "text-[var(--text-special)]" : ''}`}>
+      <a
+        href="#About"
+        className={`text-sm font-medium w-full text-center p-2 ${
+          props.selected == "About" ? "text-[var(--text-special)]" : ""
+        }`}
+      >
         About
       </a>
       <a
         href="#Projects"
-        className={`text-sm font-medium w-full text-center p-2 ${props.selected == "Projects" ? "text-[var(--text-special)]" : ''}`}
+        className={`text-sm font-medium w-full text-center p-2 ${
+          props.selected == "Projects" ? "text-[var(--text-special)]" : ""
+        }`}
       >
         Projects
       </a>
       <a
         href="#Skills"
-        className={`text-sm font-medium w-full text-center p-2 ${props.selected == "Skills" ? "text-[var(--text-special)]" : ''}`}
+        className={`text-sm font-medium w-full text-center p-2 ${
+          props.selected == "Skills" ? "text-[var(--text-special)]" : ""
+        }`}
       >
         Skills
       </a>
-      <a href="#Contact" className={`text-sm font-medium w-full text-center p-2 ${props.selected == "Contact" ? "text-[var(--text-special)]" : ''}`}>
+      <a
+        href="#Contact"
+        className={`text-sm font-medium w-full text-center p-2 ${
+          props.selected == "Contact" ? "text-[var(--text-special)]" : ""
+        }`}
+      >
         Contact
       </a>
     </div>
   );
 };
 
-const LinksComponenT = (props: {scroll : boolean, sectionSelected: string}) => {
+const LinksComponenT = (props: {
+  scroll: boolean;
+  sectionSelected: string;
+}) => {
   const [navLinks, setNavLinks] = useState(false);
   const [switchNavLinks, setSwitchNavLinks] = useState(true);
   const [scope, animate] = useAnimate();
@@ -66,24 +87,23 @@ const LinksComponenT = (props: {scroll : boolean, sectionSelected: string}) => {
     setSwitchNavLinks(window.innerWidth < 768 ? true : false);
   }, []);
 
-
   useEffect(() => {
     setTimeout(() => {
-    scope &&
-      scope.current &&
-      animate(
-        scope?.current?.children,
-        {
-          y: [-10, 0], // Move from 50px down to its original position
-          opacity: [0, 1],
-        },
-        {
-          duration: 0.8,
-          delay: stagger(0.3), // Stagger by 0.3 seconds
-          ease: "easeInOut",
-        }
-      );
-    },1);
+      scope &&
+        scope.current &&
+        animate(
+          scope?.current?.children,
+          {
+            y: [-10, 0], // Move from 50px down to its original position
+            opacity: [0, 1],
+          },
+          {
+            duration: 0.8,
+            delay: stagger(0.3), // Stagger by 0.3 seconds
+            ease: "easeInOut",
+          }
+        );
+    }, 1);
 
     window.addEventListener("resize", () => {
       if (window.innerWidth < 768) {
@@ -105,40 +125,66 @@ const LinksComponenT = (props: {scroll : boolean, sectionSelected: string}) => {
   }, [scope, animate, switchNavLinks]);
   const router = useRouter();
 
-
   return (
     <nav
       className={`z-[1000] font-extrabold pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer 
-      backdrop-blur-xl backdrop-filter bg-[var(--bg-nav)] ${props.scroll ? "shadow-lg" : ""}
+      backdrop-blur-xl backdrop-filter bg-[var(--bg-nav)] ${
+        props.scroll ? "shadow-lg" : ""
+      }
       `}
     >
       <Image
         priority
-        className={`cursor-pointer  ${!switchNavLinks? "w-[100px] h-[100px]" : "w-[70px] h-[70px]"}`}
+        className={`cursor-pointer  ${
+          !switchNavLinks ? "w-[100px] h-[100px]" : "w-[70px] h-[70px]"
+        }`}
         src="./ES.svg"
         alt="logo"
-        width={!switchNavLinks? 100 : 70}
-        height={!switchNavLinks? 100 : 70}
-        
+        width={!switchNavLinks ? 100 : 70}
+        height={!switchNavLinks ? 100 : 70}
         onClick={() => router.push("/#Home")}
       />
 
-
       {!switchNavLinks ? (
         <div className="flex items-center gap-4" ref={scope}>
-          <a href="#Home" className={`text-sm font-medium ${props.sectionSelected == "Home" ? 'ActiveSection' : '' }`}>
+          <a
+            href="#Home"
+            className={`text-sm font-medium ${
+              props.sectionSelected == "Home" ? "ActiveSection" : ""
+            }`}
+          >
             Home
           </a>
-          <a href="#About" className={`text-sm font-medium ${props.sectionSelected == "About" ? 'ActiveSection' : '' }`}>
+          <a
+            href="#About"
+            className={`text-sm font-medium ${
+              props.sectionSelected == "About" ? "ActiveSection" : ""
+            }`}
+          >
             About
           </a>
-          <a href="#Projects" className={`text-sm font-medium ${props.sectionSelected == "Projects" ? 'ActiveSection' : '' }`}>
+          <a
+            href="#Projects"
+            className={`text-sm font-medium ${
+              props.sectionSelected == "Projects" ? "ActiveSection" : ""
+            }`}
+          >
             Projects
           </a>
-          <a href="#Skills" className={`text-sm font-medium ${props.sectionSelected == "Skills" ? 'ActiveSection' : '' }`}>
+          <a
+            href="#Skills"
+            className={`text-sm font-medium ${
+              props.sectionSelected == "Skills" ? "ActiveSection" : ""
+            }`}
+          >
             Skills
           </a>
-          <a href="#Contact" className={`text-sm font-medium ${props.sectionSelected == "Contact" ? 'ActiveSection' : '' }`}>
+          <a
+            href="#Contact"
+            className={`text-sm font-medium ${
+              props.sectionSelected == "Contact" ? "ActiveSection" : ""
+            }`}
+          >
             Contact
           </a>
         </div>

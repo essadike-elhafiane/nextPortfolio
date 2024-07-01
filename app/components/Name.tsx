@@ -12,10 +12,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useRouter } from "next/navigation";
 
-
 const Name = () => {
- 
-
   const controls = useAnimation();
   const { ref, inView } = useInView();
   const router = useRouter();

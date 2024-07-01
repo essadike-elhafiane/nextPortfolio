@@ -170,7 +170,7 @@ export default function Home() {
       isScrolling = true;
       const isChrome = navigator.userAgent.includes("Chrome");
 
-      if((currentSectionIndex != 1 && currentSectionIndex != 2) || !isChrome) {
+      if((currentSectionIndex != 1) || !isChrome) {
         // Revert to default wheel behavior
         window.removeEventListener("wheel", handleScroll);
         return;
@@ -182,7 +182,7 @@ export default function Home() {
         isScrolling = false; // Allow scrolling again after 500ms
       }, 500);
     };
-    window.addEventListener("wheel", handleScroll, { passive: false });
+    // window.addEventListener("wheel", handleScroll, { passive: false });
     return () => {
       window.removeEventListener("wheel", handleScroll);
     };

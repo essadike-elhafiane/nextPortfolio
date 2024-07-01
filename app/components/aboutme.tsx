@@ -33,16 +33,21 @@ const About = () => {
       exit={{ opacity: 0 }}
     >
       <p>
-      As a seasoned Full Stack Developer fluent in<span className="text-white"> NestJs</span>, <span className="text-white">Node.js</span>, <span className="text-white">React</span>, <span className="text-white">NextJs</span>, and
-      <span className="text-white"> JavaScript</span>, with a solid foundation in <span className="text-white">C/C++</span>, I thrive on solving complex
-      problems through code. With years of industry experience, I'm passionate
-      about pushing the boundaries of technology and collaborating with talented
-      peers to deliver innovative solutions
-      <br />
-      <br />
-      Let's connect! I am looking for opportunities to bring my background in
-      coding and my passion for software development to a professional setting,
-      where I can continue to learn and grow
+        As a seasoned Full Stack Developer fluent in
+        <span className="text-white"> NestJs</span>,{" "}
+        <span className="text-white">Node.js</span>,{" "}
+        <span className="text-white">React</span>,{" "}
+        <span className="text-white">NextJs</span>, and
+        <span className="text-white"> JavaScript</span>, with a solid foundation
+        in <span className="text-white">C/C++</span>, I thrive on solving
+        complex problems through code. With years of industry experience, I'm
+        passionate about pushing the boundaries of technology and collaborating
+        with talented peers to deliver innovative solutions
+        <br />
+        <br />
+        Let's connect! I am looking for opportunities to bring my background in
+        coding and my passion for software development to a professional
+        setting, where I can continue to learn and grow
       </p>
     </motion.div>
   );

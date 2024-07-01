@@ -1,5 +1,5 @@
 export interface ProjectProps {
-    title: string;
+  title: string;
   name: string;
   description: string;
   technologies: string[];
@@ -32,15 +32,15 @@ export const data: ProjectProps[] = [
     description:
       "Designed a Docker-based service for hosting a WordPress website. Created a multi- container setup with MariaDB for the database, WordPress for the website, and Nginx as the web server. The project demonstrated the ability to create scalable, containerized applications",
     technologies: [
-        "Wordpress",
-        "MariaDB",
-        "Nginx",
-        "Hugo",
-        "Adminer",
-        "Redis",
-        "Docker",
-        "VirtualBox",
-        ],
+      "Wordpress",
+      "MariaDB",
+      "Nginx",
+      "Hugo",
+      "Adminer",
+      "Redis",
+      "Docker",
+      "VirtualBox",
+    ],
     image: "./Docker.png",
     github: "",
     link: "",
@@ -50,15 +50,9 @@ export const data: ProjectProps[] = [
     name: "Web Server",
     description:
       "Created a non-blocking HTTP server in C++98, meeting strict functionality and coding standards. Implemented support for HTTP methods (GET, POST, DELETE), serving static websites, file uploads, and configuration management via a file. Ensured responsiveness under heavy loads and multi-port listening. Emphasized thorough testing and compliance with C++98 standard.",
-    technologies: [
-        "C++",
-        "Socket",
-        "Static web site",
-        "Http",
-        ],
+    technologies: ["C++", "Socket", "Static web site", "Http"],
     image: "./Web.webp",
     github: "",
     link: "",
   },
-  
 ];

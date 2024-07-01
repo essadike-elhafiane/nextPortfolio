@@ -30,7 +30,10 @@ const PhoneProject = (DATA: ProjectProps) => {
             <div className="flex gap-2 w-[300px] max-w-[100%] flex-wrap">
               {DATA.technologies.map((item, index) => {
                 return (
-                  <div key={index} className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300 ">
+                  <div
+                    key={index}
+                    className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300 "
+                  >
                     {item}
                   </div>
                 );
@@ -63,16 +66,17 @@ const ProjectItem = (DATA: ProjectProps) => {
           <div className="project-label z-[5]">{DATA.title}</div>
           <h4 className="project-title z-[5]">{DATA.name}</h4>
           <div className="FontMon TextColor w-[70%] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] max-w-[900px] bg-[#112240] z-[5] p-6 rounded-[5px] mt-[-15px]">
-            <p>
-            {DATA.description}
-            </p>
+            <p>{DATA.description}</p>
           </div>
           <div>
             <h2 className="mt-2 mb-4">Technologies</h2>
             <div className="flex  FontMon gap-2 w-[300px] flex-wrap">
-             {DATA.technologies.map((item, index) => {
+              {DATA.technologies.map((item, index) => {
                 return (
-                  <div key={index} className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300 ">
+                  <div
+                    key={index}
+                    className="flex items-center rounded-full bg-teal-400/10 px-3 py-1 text-xs font-medium leading-5 text-teal-300 "
+                  >
                     {item}
                   </div>
                 );
@@ -138,7 +142,7 @@ const Project = (props: { scroll: boolean }) => {
             {datA.map((item: ProjectProps, index) => {
               return (
                 <PhoneProject
-                key={index}
+                  key={index}
                   title={item.title}
                   name={item.name}
                   description={item.description}
@@ -156,7 +160,7 @@ const Project = (props: { scroll: boolean }) => {
             {datA.map((item: ProjectProps) => {
               return (
                 <ProjectItem
-                key={item.name}
+                  key={item.name}
                   title={item.title}
                   name={item.name}
                   description={item.description}
