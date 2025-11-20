@@ -16,21 +16,21 @@ const Name = () => {
   const controls = useAnimation();
   const { ref, inView } = useInView();
   const router = useRouter();
-  useEffect(() => {
-    if (inView) {
-      controls.start({
-        x: 0,
-        opacity: 1,
-        transition: { duration: 0.8, ease: "easeInOut" },
-      });
-    } else {
-      controls.start({
-        x: -100,
-        opacity: 0,
-        transition: { duration: 0.8, ease: "easeInOut" },
-      });
-    }
-  }, [controls, inView]);
+  // useEffect(() => {
+  //   if (inView) {
+  //     controls.start({
+  //       x: 0,
+  //       opacity: 1,
+  //       transition: { duration: 0.8, ease: "easeInOut" },
+  //     });
+  //   } else {
+  //     controls.start({
+  //       x: -100,
+  //       opacity: 0,
+  //       transition: { duration: 0.8, ease: "easeInOut" },
+  //     });
+  //   }
+  // }, [controls, inView]);
 
   const words = [
     {
@@ -42,10 +42,10 @@ const Name = () => {
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ x: -100, opacity: 0 }}
-      animate={controls}
-      exit={{ opacity: 0 }}
+      // ref={ref}
+      // initial={{ x: -100, opacity: 0 }}
+      // animate={controls}
+      // exit={{ opacity: 0 }}
       className="w-[80%] sm:max-w-[800px] text-left z-[2] flex flex-col gap-0 p-2"
     >
       <h3 className="text-[12px] sm:text-[22px] TextSpecialColor reveal">

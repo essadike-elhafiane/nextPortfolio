@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 ::selection {
   color: #5FEAD6; 
   background: rgba(56, 178, 172, 0.2);
@@ -15,9 +13,10 @@
   --background-end-rgb: 255, 255, 255;
   --tw-bg-opacity: 1;
   --bg-color: rgb(15 23 42/var(--tw-bg-opacity));
-  --text-color : rgb(226 232 240);
-  --text-color--op : rgb(226 232 240/.6);
-  --text-special : #5FEAD6;
+  --bg-nav: rgba(15, 23, 42, 0.8);
+  --text-color: rgb(226 232 240);
+  --text-color--op: rgb(226 232 240/.6);
+  --text-special: #5FEAD6;
 }
 
 .TextColor{
@@ -42,23 +41,60 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background:var(--bg-color);
-    overflow: hidden;
-    color: var(--text-color);
-    scrollbar-width: thin; /* Makes the scrollbar thinner */
-    scrollbar-color: var(--text-color--op) var(--bg-color);
-    
+  color: var(--text-color);
+  background: var(--bg-color);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(95, 234, 214, 0.3) var(--bg-color);
+  overscroll-behavior: none;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* ::-webkit-scrollbar {
-  width: 0px;
-  display: none; /* Width of the scrollbar */
-/* }  */
+/* Custom scrollbar for webkit browsers */
+body::-webkit-scrollbar {
+  width: 8px;
+}
 
+body::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: rgba(95, 234, 214, 0.3);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(95, 234, 214, 0.5);
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+main {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
+  overflow-x: hidden;
+}
 
 @layer utilities {
   .text-balance {
@@ -67,47 +103,61 @@ body {
 }
 
 .bgColor {
-    background-color: rgb(15 23 42/var(--tw-bg-opacity));
+  background-color: rgb(15 23 42/var(--tw-bg-opacity));
+  min-height: 100vh;
 }
 
 .tracking-effect {
-  position: fixed; /* Use fixed if you want it to follow the cursor */
-  width: 200px; /* Size of the circle */
-  height: 200px; /* Size of the circle */
+  position: fixed;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  background-color: #101f42d4; /* Dark blue color */
-  filter: blur(10px);
-  opacity: .7;
-  /* border: 50px solid #101f4253; Border color */
-  box-shadow: 0 0 300px 300px #101f42d4; /* The glow effect */
-  pointer-events: none; /* Make sure the circle doesn't prevent clicking on elements */
-  transform: translate(-50%, -50%); /* Center the circle on the cursor */
-  transition: transform 0.01s linear, width 0.01s linear, height 0.01s linear;
-  /* background-color: white; */
+  pointer-events: none;
+  will-change: transform, opacity;
+  opacity: 0.6;
+  background: radial-gradient(
+    circle at center,
+    rgba(94, 234, 212, 0.22) 0%,
+    rgba(16, 31, 66, 0.18) 40%,
+    rgba(16, 31, 66, 0) 70%
+  );
+  filter: blur(6px) saturate(120%);
+  mix-blend-mode: lighten;
+  /* GPU acceleration for smoother performance */
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@media (min-width: 1024px) {
+  .tracking-effect {
+    width: 220px;
+    height: 220px;
+  }
 }
 
 .ActiveSection {
   display: inline-block;
   color: var(--text-special);
   text-decoration: none;
-  position: relative; /* Add position relative for proper positioning of ::after pseudo-element */
+  position: relative;
 }
 
 .ActiveSection::after {
   content: '';
-  position: absolute; /* Position the ::after pseudo-element absolutely */
-  bottom: -10px; /* Adjust the position to align with the bottom border */
+  position: absolute;
+  bottom: -10px;
   left: 0;
   width: 100%;
   height: 2px;
   background: var(--text-special);
-  transition: width .3s; /* Initial transition */
+  transition: width .3s;
 }
 
 .ActiveSection:hover::after,
 .ActiveSection:focus::after {
-  width: 100%; /* Triggered width change on hover/focus */
-  transition: width .8s; /* Adjust transition duration */
+  width: 100%;
+  transition: width .8s;
 }
 
 .buttonAnimation {
@@ -124,11 +174,10 @@ body {
   box-shadow: 2px 5px 0 0 var(--text-special);
 }
 
-
 .buttonAnimation:active {
   transform: translateY(2px) translateX(1px);
   box-shadow: 0 0 0 0 var(--text-special);
-};
+}
 
 .inputGroup {
   font-family: 'Segoe UI', sans-serif;
@@ -150,11 +199,8 @@ body {
 .inputGroup label {
   font-size: 100%;
   position: absolute;
-  /* background-color: red; */
   left: 0;
-  /* top: 0; */
   padding: 0.8em;
-  /* margin-left: 0.5em; */
   pointer-events: none;
   transition: all 0.3s ease;
   color: var(--text-color--op);
@@ -173,12 +219,9 @@ body {
   border-color: rgba(56, 178, 172, 0.206);
 }
 
-/* button */
 button {
   font-family: inherit;
   font-size: 20px;
-  /* background: royalblue; */
-
   color: var(--text-special);
   padding: 0.7em 1em;
   padding-left: 0.9em;
@@ -225,63 +268,52 @@ button:active {
   from {
     transform: translateX(0.1em);
   }
-
   to {
     transform: translateX(-0.1em);
   }
 }
 
-
-.containerNav{
+.containerNav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* padding: 1em 2em; */
-  right: 20px;
-  
-  
-}
-@media (max-width: 768px){
-  .containerNav{
-    right: 10px;
-  }
+  flex-direction: column;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(95, 234, 214, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
 }
 
-.containerNav a{
-  background-color: var(--bg-color);
-  border-bottom: 1px solid #050505;
+.containerNav a {
+  background-color: transparent;
+  border-bottom: 1px solid rgba(17, 34, 64, 0.5);
   min-width: 130px;
-  font-weight: 800;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.containerNav a:hover{
-  /* color: var(--text-special); */
+.containerNav a:hover {
+  background-color: #112240;
+  border-bottom: 1px solid rgba(95, 234, 214, 0.3);
+  font-weight: 600;
+}
+
+.containerNav a:first-child {
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.containerNav a:last-child {
   border-bottom: none;
-  min-width: 130px;
-  font-weight: 100;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
 }
 
-.containerNav :nth-child(1){
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-}
-
-.containerNav :last-child{
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-
-/* Path: app/components/Navbar.js */
-
-.FontMon{
+.FontMon {
   font-family: monospace;
 }
 
-
-
 a {
-  display: inline-blesock;
+  display: inline-block;
   color: inherit;
   text-decoration: none;
   text-decoration-skip-ink: auto;
@@ -293,8 +325,7 @@ button {
   cursor: pointer;
 }
 
-ul,
-ol {
+ul, ol {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -314,78 +345,60 @@ img {
 
 .project-container {
   max-width: 1000px;
-  
 }
 
-/* .project {
-  margin: 30px;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  align-items: center;
-  
-  @media screen and (max-width: 768px) {
-    align-items: flex-start;
-  }
-} */
+.project-label {
+  color: #64ffda;
+  font-family: monospace;
+}
 
-
-
-  .project-label {
-    color: #64ffda;
-    font-family: monospace;
-  }
-  .project-title {
-    font-size: 2rem;
-    margin: 10px 0 30px;
-    color: #eee;
-  }
-
-
+.project-title {
+  font-size: 2rem;
+  margin: 10px 0 30px;
+  color: #eee;
+}
 
 .overlay {
- opacity: .6;
+  opacity: .6;
 }
 
 .ConatinerPrj:hover .overlay {
   opacity: 1;
 }
 
-.Clicked{
+.Clicked {
   padding: 0.8em 2em;
   border-bottom: 2px solid transparent;
   border-left: 2px solid transparent;
 }
 
-.Clicked:hover{
+.Clicked:hover {
   color: var(--text-special);
   background-color: #112240;
   padding: 0.8em 2em;
 }
 
-.SelectedSkillsP{
+.SelectedSkillsP {
   color: var(--text-special);
   background-color: #112240;
   border-bottom: 2px solid var(--text-special);
   transition: all .5s ease;
 }
 
-.SelectedSkills{
+.SelectedSkills {
   color: var(--text-special);
   background-color: #112240;
   border-left: 2px solid var(--text-special);
   transition: all .5s ease;
 }
 
-.borderBottom{
+.borderBottom {
   border-bottom: 2px solid #112240;
 }
 
-.borderLeft{
+.borderLeft {
   border-left: 2px solid #112240;
 }
-
 
 @keyframes slideInFromLeft {
   0% {
@@ -399,8 +412,8 @@ img {
 }
 
 .SlideAnimation {
-  opacity: 0; /* Start with opacity 0 */
-  animation: slideInFromLeft 0.5s ease forwards; /* Apply the animation */
+  opacity: 1;
+  animation: none;
 }
 
 .cool-link {
@@ -421,4 +434,90 @@ img {
 .cool-link:hover::after {
   width: 100%;
   transition: width .3s;
+}
+
+/* Enhanced navbar styles */
+.navBarContainer {
+  border-bottom: 1px solid rgba(95, 234, 214, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navBarContainer * {
+  pointer-events: auto;
+}
+
+.navBarContainer.shadow-lg {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06),
+              0 0 0 1px rgba(95, 234, 214, 0.08);
+}
+
+/* Smooth page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Scroll snap sections */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+  position: relative;
+}
+
+/* Optimize animations for performance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Disable scroll snap on mobile/tablet for better UX */
+@media (max-width: 1024px) {
+  main {
+    scroll-snap-type: none;
+    height: auto;
+  }
+  
+  section {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+    min-height: 100vh;
+  }
+}
+
+/* Add smooth backdrop blur for better visual hierarchy */
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }

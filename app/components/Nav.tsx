@@ -1,203 +1,363 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion, stagger, useAnimate } from "framer-motion";
+import React, { useEffect, useState, useRef } from "react";
+import { motion, stagger, useAnimate, AnimatePresence } from "framer-motion";
 import "@/app/globals.css";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useClickAway } from "@uidotdev/usehooks";
+// Custom click away hook
+const useClickAway = (ref: React.RefObject<HTMLElement>, callback: () => void) => {
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        callback();
+      }
+    };
 
-const LinksComponent = (props: { selected: string }) => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [ref, callback]);
+};
+
+interface LinksComponentProps {
+  selected: string;
+  onSectionClick?: (section: string) => void;
+  onClose: () => void;
+}
+
+const LinksComponent = ({ selected, onSectionClick, onClose }: LinksComponentProps) => {
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
-    animate(
-      "a",
-      {
-        x: [10, 0], // Slide from 50px above to 0px
-        opacity: [0, 1],
+    if (scope.current) {
+      animate(
+        "a",
+        {
+          x: [20, 0],
+          opacity: [0, 1],
+        },
+        {
+          duration: 0.3,
+          delay: stagger(0.08),
+          ease: "easeOut",
+        }
+      );
+    }
+  }, [animate, scope]);
+
+  const handleLinkClick = (section: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    onSectionClick?.(section);
+    onClose();
+  };
+
+  const menuVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.95,
+      y: -10,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut",
       },
-      {
-        duration: 0.1,
-        delay: stagger(0.1), // Stagger by 0.3 seconds
-        ease: "easeInOut",
-      }
-    );
-  }, [animate]);
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      y: -10,
+      transition: {
+        duration: 0.15,
+        ease: "easeIn",
+      },
+    },
+  };
 
   return (
-    <div
-      className="absolute mt-[210px] w-[50%] min-w-[60px] max-w-[180px] flex flex-col containerNav z-[100]"
+    <motion.div
+      className="fixed right-2 sm:right-4 top-[64px] sm:top-[74px] lg:top-[84px] w-[70%] sm:w-[60%] min-w-[160px] max-w-[220px] flex flex-col containerNav z-[100] shadow-xl"
       ref={scope}
+      variants={menuVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
     >
-      <a
-        href="#Home"
-        className={`text-sm font-medium w-full text-center p-2 ${
-          props.selected == "Home" ? "text-[var(--text-special)]" : ""
-        }`}
-      >
-        Home
-      </a>
-      <a
-        href="#About"
-        className={`text-sm font-medium w-full text-center p-2 ${
-          props.selected == "About" ? "text-[var(--text-special)]" : ""
-        }`}
-      >
-        About
-      </a>
-      <a
-        href="#Projects"
-        className={`text-sm font-medium w-full text-center p-2 ${
-          props.selected == "Projects" ? "text-[var(--text-special)]" : ""
-        }`}
-      >
-        Projects
-      </a>
-      <a
-        href="#Skills"
-        className={`text-sm font-medium w-full text-center p-2 ${
-          props.selected == "Skills" ? "text-[var(--text-special)]" : ""
-        }`}
-      >
-        Skills
-      </a>
-      <a
-        href="#Contact"
-        className={`text-sm font-medium w-full text-center p-2 ${
-          props.selected == "Contact" ? "text-[var(--text-special)]" : ""
-        }`}
-      >
-        Contact
-      </a>
-    </div>
+      {["Home", "About", "Projects", "Skills", "Contact"].map((section, index) => (
+        <motion.a
+          key={section}
+          href={`#${section}`}
+          onClick={(e) => handleLinkClick(section, e)}
+          className={`text-sm font-medium w-full text-center p-3 transition-all duration-200 hover:bg-[#112240] hover:text-[var(--text-special)] flex items-center justify-center gap-2 ${
+            selected === section ? "text-[var(--text-special)] bg-[#112240]" : ""
+          }`}
+          whileHover={{
+            x: 5,
+            transition: { duration: 0.2 },
+          }}
+          whileTap={{
+            scale: 0.98,
+            transition: { duration: 0.1 },
+          }}
+        >
+          <span className={`text-xs font-mono ${
+            selected === section ? "text-[var(--text-special)]" : "text-[var(--text-color--op)]"
+          }`}>
+            0{index}.
+          </span>
+          <span>{section}</span>
+        </motion.a>
+      ))}
+    </motion.div>
   );
 };
 
-const LinksComponenT = (props: {
-  scroll: boolean;
+interface LinksComponenTProps {
   sectionSelected: string;
-}) => {
+  onSectionClick?: (section: string) => void;
+}
+
+const LinksComponenT = ({ sectionSelected, onSectionClick }: LinksComponenTProps) => {
   const [navLinks, setNavLinks] = useState(false);
   const [switchNavLinks, setSwitchNavLinks] = useState(true);
+  const [isClient, setIsClient] = useState(false);
   const [scope, animate] = useAnimate();
+  const router = useRouter();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
+  // Prevent hydration mismatch by only rendering after mount
   useEffect(() => {
-    setSwitchNavLinks(window.innerWidth < 768 ? true : false);
+    setIsClient(true);
+    // Set initial responsive state
+    const isMobile = window.innerWidth < 1024;
+    setSwitchNavLinks(isMobile);
   }, []);
 
+  // Close mobile menu when clicking outside
+  useClickAway(mobileMenuRef, () => {
+    if (navLinks) {
+      setNavLinks(false);
+    }
+  });
+
+  // Handle responsive design
   useEffect(() => {
-    setTimeout(() => {
-      scope &&
-        scope.current &&
+    if (!isClient) return;
+
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 1024;
+      setSwitchNavLinks(isMobile);
+      
+      // Close mobile menu when switching to desktop
+      if (!isMobile && navLinks) {
+        setNavLinks(false);
+      }
+    };
+    
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [navLinks, isClient]);
+
+  // Animate desktop navigation links
+  useEffect(() => {
+    if (!switchNavLinks && scope.current) {
+      const timer = setTimeout(() => {
         animate(
-          scope?.current?.children,
+          scope.current.children,
           {
-            y: [-10, 0], // Move from 50px down to its original position
+            y: [-15, 0],
             opacity: [0, 1],
           },
           {
-            duration: 0.8,
-            delay: stagger(0.3), // Stagger by 0.3 seconds
-            ease: "easeInOut",
+            duration: 0.6,
+            delay: stagger(0.1),
+            ease: "easeOut",
           }
         );
-    }, 1);
+      }, 100);
 
-    window.addEventListener("resize", () => {
-      if (window.innerWidth < 768) {
-        setSwitchNavLinks(true);
-      } else {
-        setSwitchNavLinks(false);
-      }
-    });
-
-    return () => {
-      window.removeEventListener("resize", () => {
-        if (window.innerWidth < 768) {
-          setSwitchNavLinks(true);
-        } else {
-          setSwitchNavLinks(false);
-        }
-      });
-    };
+      return () => clearTimeout(timer);
+    }
   }, [scope, animate, switchNavLinks]);
-  const router = useRouter();
+
+  const handleSectionClick = (section: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    onSectionClick?.(section);
+  };
+
+  const handleLogoClick = () => {
+    onSectionClick?.("Home");
+  };
+
+  // Close mobile menu
+  const closeMobileMenu = () => {
+    setNavLinks(false);
+  };
+
+  // Handle escape key to close mobile menu
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && navLinks) {
+        setNavLinks(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [navLinks]);
+
+  // Navbar animation variants
+  const navbarVariants = {
+    hidden: {
+      y: -100,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
 
   return (
-    <nav
-      className={`z-[1000] font-extrabold pl-8  pr-8 absolute w-[100vw] flex justify-between p-4 items-center h-[60px] md-h-[95px] navBarContainer 
-      backdrop-blur-xl backdrop-filter bg-[var(--bg-nav)] ${
-        props.scroll ? "shadow-lg" : ""
-      }
-      `}
+    <motion.nav
+      className={`z-[1000] font-extrabold fixed inset-x-0 top-0 w-full h-[60px] sm:h-[70px] lg:h-[80px] navBarContainer 
+      backdrop-blur-xl backdrop-filter bg-[var(--bg-nav)] transition-all duration-300 shadow-lg`}
+      variants={navbarVariants}
+      initial="visible"
+      animate="visible"
     >
-      <Image
-        priority
-        className={`cursor-pointer  ${
-          !switchNavLinks ? "w-[100px] h-[100px]" : "w-[70px] h-[70px]"
-        }`}
-        src="./ES.svg"
-        alt="logo"
-        width={!switchNavLinks ? 100 : 70}
-        height={!switchNavLinks ? 100 : 70}
-        onClick={() => router.push("/#Home")}
-      />
-
-      {!switchNavLinks ? (
-        <div className="flex items-center gap-4" ref={scope}>
-          <a
-            href="#Home"
-            className={`text-sm font-medium ${
-              props.sectionSelected == "Home" ? "ActiveSection" : ""
+      <div className="mx-auto max-w-7xl w-full h-full px-3 sm:px-4 md:px-6 lg:px-8 flex items-center justify-between">
+        {/* Logo with animation */}
+        <motion.div
+          whileHover={{ scale: 1.05, rotate: 5 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
+          <Image
+            priority
+            className={`cursor-pointer transition-all duration-300 ${
+              !switchNavLinks ? "w-[56px] h-[56px] sm:w-[60px] sm:h-[60px] lg:w-[64px] lg:h-[64px]" : "w-[40px] h-[40px] sm:w-[48px] sm:h-[48px]"
             }`}
-          >
-            Home
-          </a>
-          <a
-            href="#About"
-            className={`text-sm font-medium ${
-              props.sectionSelected == "About" ? "ActiveSection" : ""
-            }`}
-          >
-            About
-          </a>
-          <a
-            href="#Projects"
-            className={`text-sm font-medium ${
-              props.sectionSelected == "Projects" ? "ActiveSection" : ""
-            }`}
-          >
-            Projects
-          </a>
-          <a
-            href="#Skills"
-            className={`text-sm font-medium ${
-              props.sectionSelected == "Skills" ? "ActiveSection" : ""
-            }`}
-          >
-            Skills
-          </a>
-          <a
-            href="#Contact"
-            className={`text-sm font-medium ${
-              props.sectionSelected == "Contact" ? "ActiveSection" : ""
-            }`}
-          >
-            Contact
-          </a>
-        </div>
-      ) : (
-        <>
-          <FaBars
-            className="w-[25px] h-[25px] "
-            onClick={() => setNavLinks(!navLinks)}
+            src="./ES.svg"
+            alt="logo"
+            width={!switchNavLinks ? 64 : 48}
+            height={!switchNavLinks ? 64 : 48}
+            onClick={handleLogoClick}
           />
-          {navLinks && <LinksComponent selected={props.sectionSelected} />}
-        </>
-      )}
-    </nav>
+        </motion.div>
+
+        {/* Desktop Navigation */}
+        {isClient && !switchNavLinks ? (
+          <motion.div 
+            className="flex items-center gap-4 lg:gap-6 xl:gap-8" 
+            ref={scope}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            {["Home", "About", "Projects", "Skills", "Contact"].map((section, index) => (
+              <motion.a
+                key={section}
+                href={`#${section}`}
+                onClick={(e) => handleSectionClick(section, e)}
+                className={`text-xs sm:text-sm font-medium relative transition-all duration-300 flex items-center gap-1.5 lg:gap-2 group ${
+                  sectionSelected === section ? "text-[var(--text-special)]" : "text-[var(--text-color)] hover:text-[var(--text-special)]"
+                }`}
+                whileHover={{
+                  y: -2,
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{
+                  scale: 0.95,
+                  transition: { duration: 0.1 },
+                }}
+              >
+                <span className={`text-[10px] sm:text-xs font-mono transition-all duration-300 ${
+                  sectionSelected === section ? "text-[var(--text-special)]" : "text-[var(--text-color--op)] group-hover:text-[var(--text-special)]"
+                }`}>
+                  0{index}.
+                </span>
+                <span className="font-medium">{section}</span>
+                {/* Active indicator */}
+                {sectionSelected === section && (
+                  <motion.div
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--text-special)]"
+                    layoutId="activeSection"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 30,
+                    }}
+                  />
+                )}
+              </motion.a>
+            ))}
+          </motion.div>
+        ) : isClient ? (
+          /* Mobile Menu Button and Dropdown */
+          <div ref={mobileMenuRef} className="relative flex items-center">
+            <motion.button
+              onClick={() => setNavLinks(!navLinks)}
+              className="p-2 sm:p-2.5 hover:bg-[#112240] rounded-lg transition-colors duration-200 flex items-center justify-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Toggle navigation menu"
+              aria-expanded={navLinks}
+            >
+              <motion.div
+                animate={{ rotate: navLinks ? 90 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex items-center justify-center"
+              >
+                {navLinks ? (
+                  <FaTimes className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--text-special)]" />
+                ) : (
+                  <FaBars className="w-5 h-5 sm:w-6 sm:h-6 text-[var(--text-color)]" />
+                )}
+              </motion.div>
+            </motion.button>
+
+            {/* Mobile Menu Dropdown */}
+            <AnimatePresence mode="wait">
+              {navLinks && (
+                <LinksComponent
+                  selected={sectionSelected}
+                  onSectionClick={onSectionClick}
+                  onClose={closeMobileMenu}
+                />
+              )}
+            </AnimatePresence>
+          </div>
+        ) : (
+          /* Loading placeholder */
+          <div className="w-10 h-10" />
+        )}
+      </div>
+
+      {/* Mobile menu overlay */}
+      <AnimatePresence>
+        {navLinks && switchNavLinks && (
+          <motion.div
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[99]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={closeMobileMenu}
+          />
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 

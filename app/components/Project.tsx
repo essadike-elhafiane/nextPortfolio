@@ -2,10 +2,6 @@
 import "@/app/globals.css";
 import { Meteors } from "@/app/utils/meteors";
 import "@/app/globals.css";
-import { motion, useAnimation } from "framer-motion";
-import { stagger, useAnimate } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
 import {
   SlSocialFacebook,
   SlSocialGithub,
@@ -103,40 +99,11 @@ const ProjectItem = (DATA: ProjectProps) => {
 };
 
 const Project = (props: { scroll: boolean }) => {
-  const controls = useAnimation();
-  const { ref, inView } = useInView();
   const datA: ProjectProps[] = data;
 
-  useEffect(() => {
-    if (inView) {
-      controls.start({
-        x: 0,
-        opacity: 1,
-        transition: { duration: 1, ease: "easeInOut" },
-      });
-    } else {
-      controls.start({
-        x: -100,
-        opacity: 0,
-        transition: { duration: 0.5, ease: "easeInOut" },
-      });
-    }
-  }, [controls, inView]);
-
   return (
-    <motion.div
-      ref={ref}
-      className="flex flex-col justify-center items-center w-[100%]"
-      initial={{ x: -100, opacity: 0 }}
-      animate={controls}
-      exit={{ opacity: 0 }}
-    >
-      <motion.div
-        className="flex w-[80%] flex-wrap gap-4 max-w-[1600px] justify-center items-center delay-75"
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 1, ease: "easeInOut" }}
-      >
+    <div className="flex flex-col justify-center items-center w-[100%]">
+      <div className="flex w-[80%] flex-wrap gap-4 max-w-[1600px] justify-center items-center">
         {!props.scroll && (
           <React.Fragment>
             {datA.map((item: ProjectProps, index) => {
@@ -173,8 +140,8 @@ const Project = (props: { scroll: boolean }) => {
             })}
           </React.Fragment>
         )}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
